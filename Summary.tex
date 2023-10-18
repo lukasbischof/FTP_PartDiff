@@ -71,9 +71,76 @@
 	$\int e^{ax}\ dx$ & $= \frac{1}{a} e^{ax} + C$ \\
 	$\int \sin(ax)\ dx$ & $= -\frac{1}{a}\cos(ax) + C$ \\
 	$\int \sin^2(ax)\ dx$ & $= \frac{x}{2}-\frac{\sin(2ax)}{4a} + C$ \\
+	$\int x\cos x\ dx$ & $= \cos x + x\sin x + C$ \\
 	$\int \sinh(ax)\ dx$ & $= a^{-1}\cosh{ax} + C$ \\
 	$\int \cosh(ax)\ dx$ & $= a^{-1}\sinh{ax} + C$ \\
 \end{tabular}
+
+\section{Linearity}
+Given an equation involving function $u(x), x\in\mathbb{R}$ and its derivatives, 
+there is a function $F$ describing the relation:
+\begin{equation}
+	F\left(
+	\begin{matrix}
+		x,y,z,p,q,s,t,r,\ldots \\
+		\downarrow \text{(corresponding to)}\downarrow \\
+		x, y, u, \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}, \frac{\partial^2 u}{\partial x^2},
+		\frac{\partial^2 u}{\partial x\partial y},\frac{\partial^2 u}{\partial y^2}, \ldots
+	\end{matrix}
+	\right) = 0
+\end{equation}
+(common variable names $p_i\rightarrow\frac{\partial u}{\partial x_i}$ and 
+$t_{ij} \rightarrow\frac{\partial^2 u}{\partial x_i\partial x_j}$)
+
+A PDE is \emph{linear} when function $F$ is linear in $u,p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
+
+A PDF is \emph{quasilinear} when function $F$ is linear in $p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
+
+\section{Domain and Boundary}
+\begin{itemize}
+	\item Domain $\Omega$ is an open subset of $\mathbb{R}^n$ (meaning all points are interior points)
+	\item Boundary has to meet conditions:
+	\item{ \emph{Dirichlet boundary conditions}: specify values $u$ on $\partial\Omega$: \\
+		$u(x) = f(x)\ \forall x\in\partial\Omega$
+	}
+	\item{\emph{Neumann boundary conditions}: specify derivatives of $u$ on boundary. 
+		Only derivatives orthogonal to the boundary give additional information: \\
+		normal derivative: $\frac{\partial u}{\partial n} = g(x)\ \forall x\in\partial\Omega$
+	}
+\end{itemize}
+
+\section{Quasilinear PDEs}
+
+Given a PDE $F(x,y,u,\frac{\partial u}{\partial x},\frac{\partial u}{\partial y}) = 0$, the PDE defines a relation between the two slopes: $F(x,y,u,m_x,m_y)=0$
+
+\subsection{Characteristics}
+
+The PDE
+
+\begin{equation}
+	a(x,y,u)\frac{\partial u}{\partial x}+b(x,y,u)\frac{\partial u}{\partial y} - c(x,y,u) = 0
+\end{equation}
+can be written in vector notation:
+\begin{align*}
+{\color{red}
+\underbrace{
+\begin{pmatrix}
+a(x,y,u)\\
+b(x,y,u)\\
+c(x,y,u)
+\end{pmatrix}
+}_{\vec t}
+}
+\cdot
+{\color{blue}
+\begin{pmatrix}
+\frac{\partial u}{\partial x}\\
+\frac{\partial u}{\partial y}\\
+-1
+\end{pmatrix}
+}
+&= 0
+\end{align*}
 
 \end{multicols}
 
