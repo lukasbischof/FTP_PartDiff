@@ -1,12 +1,11 @@
 \documentclass[10pt,landscape]{article}
-\usepackage{amssymb,amsmath,amsthm,amsfonts}
 \usepackage{multicol,multirow}
 \usepackage{calc}
 \usepackage{ifthen}
 \usepackage[landscape]{geometry}
 \usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
 \usepackage[fleqn]{amsmath}
-
+\usepackage{amssymb,amsthm,amsfonts}
 
 \ifthenelse{\lengthtest { \paperwidth = 11in}}
     { \geometry{top=.3in,left=.3in,right=.3in,bottom=.3in} }
@@ -109,7 +108,7 @@ Special case where $a(x)=a=\mathrm{const.}$ and $b(x)=b=\mathrm{const.}$:
 \end{equation*}
 
 \section{Linearity}
-Given an equation involving function $u(x), x\in\mathbb{R}$ and its derivatives, 
+Given an equation involving function $u(x), x\in\mathbb{R}$ and its derivatives,
 there is a function $F$ describing the relation:
 \begin{equation}
 	F\left(
@@ -121,7 +120,7 @@ there is a function $F$ describing the relation:
 	\end{matrix}
 	\right) = 0
 \end{equation}
-(common variable names $p_i\rightarrow\frac{\partial u}{\partial x_i}$ and 
+(common variable names $p_i\rightarrow\frac{\partial u}{\partial x_i}$ and
 $t_{ij} \rightarrow\frac{\partial^2 u}{\partial x_i\partial x_j}$)
 
 A PDE is \emph{linear} when function $F$ is linear in $u,p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
@@ -135,7 +134,7 @@ A PDF is \emph{quasilinear} when function $F$ is linear in $p_1,\ldots,p_n,t_{11
 	\item{ \emph{Dirichlet boundary conditions}: specify values $u$ on $\partial\Omega$: \\
 		$u(x) = f(x)\ \forall x\in\partial\Omega$
 	}
-	\item{\emph{Neumann boundary conditions}: specify derivatives of $u$ on boundary. 
+	\item{\emph{Neumann boundary conditions}: specify derivatives of $u$ on boundary.
 		Only derivatives orthogonal to the boundary give additional information: \\
 		normal derivative: $\frac{\partial u}{\partial n} = g(x)\ \forall x\in\partial\Omega$
 	}

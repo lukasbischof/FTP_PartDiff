@@ -1,0 +1,33 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish_linux_amd64:
+    name: Build LaTeX and Publish Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        name: Setup Tectonic cache
+        with:
+          path: ~/.cache/Tectonic
+          key: ${{ runner.os }}-tectonic-${{ hashFiles('**/*.tex') }}
+          restore-keys: |
+            ${{ runner.os }}-tectonic-
+      - uses: wtfjoke/setup-tectonic@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        run: make
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: Summary.pdf
+          asset_name: summary
+          tag: ${{ github.ref }}
+          overwrite: true
