@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Python script for solving the advection hyperbolic PDE with the (numerically unstable)
+# Python script for solving the hyperbolic advection PDE with the (numerically unstable)
 # downwind scheme.
 
 import numpy as np
