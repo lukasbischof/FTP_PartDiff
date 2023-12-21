@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 #
 # Python script for solving the hyperbolic advection PDE with the (numerically unstable)
-# downwind scheme.
+# downwind scheme. Since the method is unstable, it is not recommended to use it for
+# any problem beyond these toy examples.
+#
 
 import numpy as np
 import sympy as sp
