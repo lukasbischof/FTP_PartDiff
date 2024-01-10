@@ -179,9 +179,28 @@ The type of equation can be inferred by the sign of the eigenvalues $\lambda_1,\
 Calculating the determinant ($\det A=\prod_i \lambda_i$) and trace ($\mathrm{tr}\ A=\sum_i \lambda_i$)
 reveals information about the signs of its eigenvalues:
 
-\begin{center}
-  \makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/classification}}
-\end{center}
+\subsubsection{Two variables of PDE}
+
+\begin{align*}
+\det A
+\left\{
+\begin{matrix}
+	>0 & \text{elliptic} \\
+	=0 & \text{parabolic} \\
+	<0 & \text{hyperbolic}
+\end{matrix}
+\right.
+\end{align*}
+
+\subsubsection{Three variables of PDE}
+
+\begin{align*}
+	\mathrm{rank}\ A < 2 & \Rightarrow \text{not classified} \\
+	\det A\text{ and }\mathrm{tr}\ A\text{ have different sign} & \Rightarrow\text{hyperbolic} \\
+	\det A=0\text{, semidefinite (Cholesky)} & \Rightarrow\text{parabolic} \\
+	A\text{ or }-A\text{ positive definite (Cholesky)} & \Rightarrow\text{elliptic} \\
+	\text{all other cases} & \Rightarrow\text{hyperbolic}
+\end{align*}
 
 \section{Quasilinear PDEs}
 
