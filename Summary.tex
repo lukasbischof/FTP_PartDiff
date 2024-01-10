@@ -6,6 +6,7 @@
 \usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
 \usepackage[fleqn]{amsmath}
 \usepackage{amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
 
 \ifthenelse{\lengthtest { \paperwidth = 11in}}
     { \geometry{top=.3in,left=.3in,right=.3in,bottom=.3in} }
@@ -32,6 +33,7 @@
 \setcounter{secnumdepth}{0}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt plus 0.5ex}
+\setlength{\mathindent}{0pt}
 % -----------------------------------------------------------------------
 
 \title{Partial Differential Equations}
@@ -107,26 +109,6 @@ Special case where $a(x)=a=\mathrm{const.}$ and $b(x)=b=\mathrm{const.}$:
 	=\int_a^b\frac{\partial}{\partial x}f(x,t)\ dt
 \end{equation*}
 
-\section{Linearity}
-Given an equation involving function $u(x), x\in\mathbb{R}$ and its derivatives,
-there is a function $F$ describing the relation:
-\begin{equation}
-	F\left(
-	\begin{matrix}
-		x,y,z,p,q,s,t,r,\ldots \\
-		\downarrow \text{(corresponding to)}\downarrow \\
-		x, y, u, \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}, \frac{\partial^2 u}{\partial x^2},
-		\frac{\partial^2 u}{\partial x\partial y},\frac{\partial^2 u}{\partial y^2}, \ldots
-	\end{matrix}
-	\right) = 0
-\end{equation}
-(common variable names $p_i\rightarrow\frac{\partial u}{\partial x_i}$ and
-$t_{ij} \rightarrow\frac{\partial^2 u}{\partial x_i\partial x_j}$)
-
-A PDE is \emph{linear} when function $F$ is linear in $u,p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
-
-A PDF is \emph{quasilinear} when function $F$ is linear in $p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
-
 \section{Domain and Boundary}
 \begin{itemize}
 	\item Domain $\Omega$ is an open subset of $\mathbb{R}^n$ (meaning all points are interior points)
@@ -140,6 +122,67 @@ A PDF is \emph{quasilinear} when function $F$ is linear in $p_1,\ldots,p_n,t_{11
 	}
 \end{itemize}
 
+\section{Classification}
+\begin{center}
+  \makebox[\columnwidth]{\includegraphics[width=0.9\columnwidth]{images/decision-tree}}
+\end{center}
+
+\subsection{Linearity}
+Given an equation involving function $u(x), x\in\mathbb{R}$ and its derivatives,
+there is a function $F$ describing the relation:
+\begin{align*}
+	F\left(
+	\begin{matrix}
+		x,y,z,p,q,s,t,r,\ldots \\
+		\downarrow \text{(corresponding to)}\downarrow \\
+		x, y, u, \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}, \frac{\partial^2 u}{\partial x^2},
+		\frac{\partial^2 u}{\partial x\partial y},\frac{\partial^2 u}{\partial y^2}, \ldots
+	\end{matrix}
+	\right) = 0
+\end{align*}
+(common variable names $p_i\rightarrow\frac{\partial u}{\partial x_i}$ and
+$t_{ij} \rightarrow\frac{\partial^2 u}{\partial x_i\partial x_j}$)
+
+A PDE is \emph{linear} when function $F$ is linear in $u,p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
+
+A PDF is \emph{quasilinear} when function $F$ is linear in $p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
+
+For example, given the heat equation $u_t=\kappa u_{xx}$, $F$ would be $F(p_1,t_{22})=p_1-\kappa t_{22}$.
+
+\subsection{2\textsuperscript{nd} Order PDEs: Symbol Matrix}
+
+The symbol matrix of the 2\textsuperscript{nd} order partial differential operator
+
+\begin{align*}
+	L=\sum_{i,j=1}^{n}a_{ij}(x)\frac{\partial^2}{\partial x_i \partial x_j}+\sum_{i=1}^n b_i(x)\frac{\partial}{\partial x_i}+c(x)
+\end{align*}
+
+is the symmetric matrix
+
+\begin{align*}
+	A=
+	\begin{bmatrix}
+		a_{11} & a_{12} & \ldots & a_{1n} \\
+		a_{21} & a_{22} & \ldots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \ldots & a_{nn}
+	\end{bmatrix}
+\end{align*}
+
+For example:
+
+\begin{center}
+  \makebox[\columnwidth]{\includegraphics[width=0.9\columnwidth]{images/symbol-matrix}}
+\end{center}
+
+The type of equation can be inferred by the sign of the eigenvalues $\lambda_1,\ldots,\lambda_n$ of the symbol matrix. 
+Calculating the determinant ($\det A=\prod_i \lambda_i$) and trace ($\mathrm{tr}\ A=\sum_i \lambda_i$)
+reveals information about the signs of its eigenvalues:
+
+\begin{center}
+  \makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/classification}}
+\end{center}
+
 \section{Quasilinear PDEs}
 
 Given a PDE $F(x,y,u,\frac{\partial u}{\partial x},\frac{\partial u}{\partial y}) = 0$, the PDE defines a relation between the two slopes: $F(x,y,u,m_x,m_y)=0$
@@ -148,46 +191,33 @@ Given a PDE $F(x,y,u,\frac{\partial u}{\partial x},\frac{\partial u}{\partial y}
 
 The PDE
 
-\begin{equation}
+\begin{align*}
 	a(x,y,u)\frac{\partial u}{\partial x}+b(x,y,u)\frac{\partial u}{\partial y} - c(x,y,u) = 0
-\end{equation}
+\end{align*}
 can be written in vector notation:
 \begin{align*}
-{\color{red}
-\underbrace{
-\begin{pmatrix}
-a(x,y,u)\\
-b(x,y,u)\\
-c(x,y,u)
-\end{pmatrix}
-}_{\vec t}
-}
-\cdot
-{\color{blue}
-\begin{pmatrix}
-\frac{\partial u}{\partial x}\\
-\frac{\partial u}{\partial y}\\
--1
-\end{pmatrix}
-}
-&= 0
+  {\color{red}
+    \underbrace{
+      \begin{pmatrix}
+        a(x,y,u) \\
+        b(x,y,u) \\
+        c(x,y,u)
+      \end{pmatrix}
+    }_{\vec t}
+  }
+  \cdot
+  {\color{blue}
+    \begin{pmatrix}
+      \frac{\partial u}{\partial x}\\
+      \frac{\partial u}{\partial y}\\
+      -1
+    \end{pmatrix}
+  }
+  &= 0
 \end{align*}
+
+\input{NumericalMethods.tex}
 
 \end{multicols}
-
-\section{Numerical Methods}
-\subsection{Discretisation of Operators}
-
-\begin{align*}
-	\frac{\partial g}{\partial x}
-	\approx
-	\frac{g(x + \Delta x) - g(x)}{\Delta x}
-\end{align*}
-
-\begin{align*}
-	\frac{\partial^2 g}{\partial x^2}
-	\approx
-	\frac{g(x + \Delta x) - 2\cdot g(x) + g(x - \Delta x)}{\Delta x^2}
-\end{align*}
 
 \end{document}

@@ -1,0 +1,61 @@
+\section{Numerical Methods}
+\subsection{Discretisation of Operators}
+
+\begin{align*}
+	\frac{\partial g}{\partial x}
+	\approx
+	\frac{g(x + \Delta x) - g(x)}{\Delta x}
+\end{align*}
+
+\begin{align*}
+	\frac{\partial^2 g}{\partial x^2}
+	\approx
+	\frac{g(x + \Delta x) - 2\cdot g(x) + g(x - \Delta x)}{\Delta x^2}
+\end{align*}
+
+($\Delta$ referring to step size)
+\subsection{Finite Elements}
+
+We have a set of given local basis functions $v_1(x), \ldots, v_n(x)$ that are continuous and piecewise differentiable.
+We subdivide $\Omega$ into meshes and assign each nodal point a nodal variable $a_k$.
+Then, we use shape functions to represent the PDE on the mesh,
+e.g. using triangular functions $l_1(x)=1-x$ and $l_2(x) = x$ to obtain \emph{local} element matrices
+\begin{align*}
+	E = 
+	\begin{bmatrix}
+		\int_0^1 l_1^\prime(s)\cdot l_1^\prime(s)\ ds & \int_0^1 l_1^\prime(s)\cdot l_2^\prime(s)\ ds \\
+		\int_0^1 l_2^\prime(s)\cdot l_1^\prime(s)\ ds & \int_0^1 l_2^\prime(s)\cdot l_2^\prime(s)\ ds
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & -1 \\
+		-1 & 1
+	\end{bmatrix}
+\end{align*}
+
+that can then be used to construct the mesh matrix $M=1/h\cdot E$ using mesh size $h$.
+Afterwards, the global Ritz matrix can be computed, e.g. for a one-dimensional mesh with 4 nodal points and 2 unknown inner points,
+yielding 4 base functions $v_1,v_2,v_3,v_4$:
+
+\begin{align*}
+	R^4 = \begin{bmatrix}
+		{\color{red} M^{(1)}_{0,0}} & \color{red}{M^{(1)}_{0,1}} & 0 & 0 \\
+		{\color{red} M^{(1)}_{1,0}} & {\color{red} M^{(1)}_{1,1}} + {\color{blue} M^{(2)}_{0,0}} & {\color{blue} M^{(2)}_{0,1}} & 0 \\
+		0 & {\color{blue} M^{(2)}_{1,0}} & {\color{blue} M^{(2)}_{1,1}} + {\color{green} M^{(3)}_{0,0}} & {\color{green} M^{(3)}_{0,1}} \\
+		0 & 0 & {\color{green} M^{(3)}_{1,0}} & {\color{green} M^{(3)}_{1,1}}
+	\end{bmatrix}
+\end{align*}
+
+The system vector can then be calculated:
+
+\begin{align*}
+	\vec{r^4} = \begin{pmatrix}
+		\int_0^1 f(x)\cdot v_0(x)\ dx \\
+		\vdots \\
+		\int_0^1 f(x)\cdot v_3(x)\ dx
+	\end{pmatrix}
+\end{align*}
+
+Finally, we have obtained the Ritz system: $R^4\cdot\vec{a}=\vec{r^4}$.
+That yields the approximation function (as defined by the ansatz): $\tilde{u}(x)=\sum_{i=0}^3 a_i\cdot v_i(x)$
+3with $a_0$ and $a_3$ fulfilling the boundary conditions.
