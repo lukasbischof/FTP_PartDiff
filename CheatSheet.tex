@@ -1,0 +1,64 @@
+\section{Cheat Sheet}
+\subsection{Derivatives}
+\begin{tabular}{r|l}
+	$f(x)$ & $\frac{df}{dx}$ \\
+	\hline
+	$\sinh(x)$ & $\cosh(x)$ \\
+	$\cosh(x)$ & $\sinh(x)$ \\
+	$\mathrm{arcsinh}(x)$ & $1 \div \sqrt{x^2+1}$ \\
+	$\mathrm{arccosh}(x)$ & $1 \div \sqrt{x^2 - 1}$ ($1<x$)
+\end{tabular}
+
+\subsection{Integrals}
+\begin{tabular}[h]{rl}
+	$\int x^n\ dx$ & $= \frac{1}{n+1}x^{n+1} + C$ \\
+	$\int \frac{1}{x}\ dx$ & $= \ln |x| + C$ \\
+	$\int \frac{1}{ax + b}\ dx$ & = $\frac{1}{a} \ln |ax+b| + C$ \\
+	$\int \frac{1}{(x+a)^2}\ dx$ & $= -\frac{1}{x+a} + C$ \\
+	$\int \frac{1}{1 + x^2}$ & $= \tan^{-1} x + C$ \\
+	$\int \ln ax\ dx$ & $= x\ln ax - x + C$ \\
+	$\int e^{ax}\ dx$ & $= \frac{1}{a} e^{ax} + C$ \\
+	$\int \sin(ax)\ dx$ & $= -\frac{1}{a}\cos(ax) + C$ \\
+	$\int \sin^2(ax)\ dx$ & $= \frac{x}{2}-\frac{\sin(2ax)}{4a} + C$ \\
+	$\int x\cos x\ dx$ & $= \cos x + x\sin x + C$ \\
+	$\int \sinh(ax)\ dx$ & $= a^{-1}\cosh{ax} + C$ \\
+	$\int \cosh(ax)\ dx$ & $= a^{-1}\sinh{ax} + C$ \\
+\end{tabular}
+
+\subsection{Integration Techniques}
+\subsubsection{Integration by Parts}
+\begin{equation*}
+	\int_a^b u(x)v'(x)\ dx = \left[ u(x)v(x) \right]_a^b-\int_a^bu'(x)v(x)\ dx
+\end{equation*}
+
+Or, with $u=u(x)$, $du=u'(x)\ dx$, $v=v(x)$ and $dv=v'(x)\ dx$:
+\begin{equation*}
+	\int u\ dv=uv - \int v\ du
+\end{equation*}
+
+\subsubsection{Substitution}
+\begin{equation*}
+	\int_a^b f(g(x))\cdot g'(x)\ dx = \int_{g(a)}^{g(b)}f(u)\ du
+\end{equation*}
+
+\subsubsection{Leibniz integral rule}
+\begin{multline*}
+	\frac{d}{dx}\left(\int_{a(x)}^{b(x)}f(x,t)\ dt\right)
+	=
+	\\
+	f(x,b(x))\cdot\frac{d}{dx}b(x)
+	-f(x,a(x))\cdot\frac{d}{dx}a(x)
+	+\int_{a(x)}^{b(x)}\frac{\partial}{\partial x}f(x,t)\ dt
+\end{multline*}
+Special case where $a(x)=a=\mathrm{const.}$ and $b(x)=b=\mathrm{const.}$:
+\begin{equation*}
+	\frac{d}{dx}\left(\int_a^b f(x,t)\ dt\right)
+	=\int_a^b\frac{\partial}{\partial x}f(x,t)\ dt
+\end{equation*}
+
+\subsection{Particular Solutions to Simple ODEs}
+
+\begin{tabular}[h]{rcl}
+	$f'(x)=\frac{c}{x}f(x)$ & $\Rightarrow$ & $f(x)=k_1y^c$ \\
+	$f'(x)=x\cdot f(x)$ & $\Rightarrow$ & $f(x)=k_1e^{cx}$
+\end{tabular}
