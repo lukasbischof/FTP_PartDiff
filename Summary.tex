@@ -7,6 +7,7 @@
 \usepackage[fleqn]{amsmath}
 \usepackage{amssymb,amsthm,amsfonts}
 \usepackage{graphicx}
+\usepackage{wrapfig}
 
 \ifthenelse{\lengthtest { \paperwidth = 11in}}
     { \geometry{top=.3in,left=.3in,right=.3in,bottom=.3in} }
@@ -149,12 +150,19 @@ reveals information about the signs of its eigenvalues:
 
 \subsection{Characteristics}
 
+\begin{wrapfigure}{r}{0.4\columnwidth}
+    \centering
+    \includegraphics[width=0.4\columnwidth]{images/quasilinear}
+\end{wrapfigure}
+
 The PDE
 
 \begin{align*}
 	a(x,y,u)\frac{\partial u}{\partial x}+b(x,y,u)\frac{\partial u}{\partial y} = c(x,y,u)
 \end{align*}
+
 can be written in vector notation:
+
 \begin{align*}
   {\color{green}
     \underbrace{
