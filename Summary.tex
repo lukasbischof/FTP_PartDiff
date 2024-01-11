@@ -247,6 +247,34 @@ Therefore, we can elaborate a solution algorithm:
 	}
 \end{enumerate}
 
+\section{Linear PDEs}
+\subsection{Separation}
+
+Conditions when separation may be successful:
+
+\begin{itemize}
+	\item Homogeneous, linear PDE
+	\item Homogeneous boundary conditions
+	\item Domain must be a cartesian product (i.e. some form of rectangle when in cartesian coordinate system)
+\end{itemize}
+
+if these are given, we can try:
+
+\begin{enumerate}
+	\item Assume the structure of the solution to be in the form of some ansatz with separable variables, usually a product $u(x,y)=X(x)\cdot Y(y)$
+	\item{
+		Substitute $u$ in PDE with ansatz by variable:
+		\begin{align*}
+			\text{all terms of }x = \text{all terms of }y = {\color{red}\lambda}
+		\end{align*}
+		and solve the ordinary differential equations for $X(x)$ and $Y(y)$.
+	}
+	\item Use \emph{homogeneous} boundary conditions to determine admissible values ${\color{red}\lambda}_k$.
+	\item Solve equations: $X_k(x)$ and $Y_k(y)$ $\Rightarrow u_k(x,y)=X_k(x)\cdot Y_k(y)$ using ansatz.
+	\item Combine solutions: $u(x,y)=\sum_{k\in \mathbb{Z}}\left(a_ku_k(x,y)\right)$
+	\item Use remaining boundary conditions to determine $a_k$.
+\end{enumerate}
+
 \input{NumericalMethods.tex}
 
 \newpage
