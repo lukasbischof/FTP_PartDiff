@@ -35,6 +35,7 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt plus 0.5ex}
 \setlength{\mathindent}{0pt}
+\setlength{\columnseprule}{0.2pt}
 % -----------------------------------------------------------------------
 
 \title{Partial Differential Equations}
@@ -123,25 +124,25 @@ The type of equation can be inferred by the sign of the eigenvalues $\lambda_1,\
 Calculating the determinant ($\det A=\prod_i \lambda_i$) and trace ($\mathrm{tr}\ A=\sum_i \lambda_i$)
 reveals information about the signs of its eigenvalues:
 
-\subsubsection{Two variables of PDE}
+\subsubsection{Two Variables of PDE}
 
 \begin{align*}
 \det A
 \left\{
 \begin{matrix}
-	>0 & \text{elliptic} \\
-	=0 & \text{parabolic} \\
-	<0 & \text{hyperbolic}
+	>0 & \text{elliptic (eigenvalues have same sign)} \\
+	=0 & \text{parabolic (at least one eigenvalue is zero)} \\
+	<0 & \text{hyperbolic (eigenvalues have opposite sign)}
 \end{matrix}
 \right.
 \end{align*}
 
-\subsubsection{Three variables of PDE}
+\subsubsection{Three Variables of PDE}
 
 \begin{align*}
 	\mathrm{rank}\ A < 2 & \Rightarrow \text{not classified} \\
 	\det A\text{ and }\mathrm{tr}\ A\text{ have different sign} & \Rightarrow\text{hyperbolic} \\
-	\det A=0\text{, semidefinite (Cholesky)} & \Rightarrow\text{parabolic} \\
+	\det A=0\text{, semidefinite (Cholesky decomp.)} & \Rightarrow\text{parabolic} \\
 	A\text{ or }-A\text{ positive definite (Cholesky)} & \Rightarrow\text{elliptic} \\
 	\text{all other cases} & \Rightarrow\text{hyperbolic}
 \end{align*}

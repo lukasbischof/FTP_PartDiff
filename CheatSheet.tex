@@ -6,7 +6,9 @@
 	$\sinh(x)$ & $\cosh(x)$ \\
 	$\cosh(x)$ & $\sinh(x)$ \\
 	$\mathrm{arcsinh}(x)$ & $1 \div \sqrt{x^2+1}$ \\
-	$\mathrm{arccosh}(x)$ & $1 \div \sqrt{x^2 - 1}$ ($1<x$)
+	$\mathrm{arccosh}(x)$ & $1 \div \sqrt{x^2 - 1}$ ($1<x$) \\
+	$\tan(x)$ & $\cos^{-2}(x)$ \\
+	$\log(x)$ & $x^{-1}$
 \end{tabular}
 
 \subsection{Integrals}
@@ -41,7 +43,7 @@ Or, with $u=u(x)$, $du=u'(x)\ dx$, $v=v(x)$ and $dv=v'(x)\ dx$:
 	\int_a^b f(g(x))\cdot g'(x)\ dx = \int_{g(a)}^{g(b)}f(u)\ du
 \end{equation*}
 
-\subsubsection{Leibniz integral rule}
+\subsubsection{Leibniz Integral Rule}
 \begin{multline*}
 	\frac{d}{dx}\left(\int_{a(x)}^{b(x)}f(x,t)\ dt\right)
 	=
@@ -60,5 +62,7 @@ Special case where $a(x)=a=\mathrm{const.}$ and $b(x)=b=\mathrm{const.}$:
 
 \begin{tabular}[h]{rcl}
 	$f'(x)=\frac{c}{x}f(x)$ & $\Rightarrow$ & $f(x)=k_1y^c$ \\
-	$f'(x)=x\cdot f(x)$ & $\Rightarrow$ & $f(x)=k_1e^{cx}$
+	$f'(x)=x\cdot f(x)$ & $\Rightarrow$ & $f(x)=k_1e^{cx}$ \\
+	$f''(x) = c\cdot f(x)$ & $\Rightarrow$ & $f(x) = k_1e^{\sqrt{c}x}+k_2e^{-\sqrt{c}x}$ \\
+	$f''(x) = -c\cdot f(x)$ & $\Rightarrow$ & $k_1\sin(\sqrt{c}x)+k_2\cos(\sqrt{c}x)$
 \end{tabular}
