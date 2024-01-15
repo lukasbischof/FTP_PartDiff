@@ -1,0 +1,77 @@
+\subsection{Separation}\label{subsec:separation}
+
+Conditions, when separation may be successful:
+
+\begin{itemize}
+    \item Homogeneous, linear PDE
+    \item Homogeneous boundary conditions
+    \item Domain must be a cartesian product (i.e. some form of rectangle when in cartesian coordinate system)
+\end{itemize}
+
+if these are given, we can try:
+
+\begin{enumerate}
+    \item Assume the structure of the solution to be in the form of some ansatz with separable variables, usually a product $u(x,y)=X(x)\cdot Y(y)$
+    \item{
+        Substitute $u$ in PDE with ansatz by variable:
+        \begin{align*}
+            \text{all terms of }x = \text{all terms of }y = {\color{red}\lambda}
+        \end{align*}
+        and solve the ordinary differential equations for $X(x)$ and $Y(y)$.
+    }
+    \item Use \emph{homogeneous} boundary conditions to determine admissible values ${\color{red}\lambda}_k$.
+    \item Solve equations: $X_k(x)$ and $Y_k(y)$ $\Rightarrow u_k(x,y)=X_k(x)\cdot Y_k(y)$ using ansatz.
+    \item Combine solutions: $u(x,y)=\sum_{k\in \mathbb{Z}}\left(a_ku_k(x,y)\right)$
+    \item Use remaining boundary conditions to determine $a_k$.
+\end{enumerate}
+
+\paragraph{Separation Example}
+
+Given the wave equation $\frac{\partial^2u}{\partial t^2}=\frac{\partial^2 u}{\partial x^2}$
+for a string mounted between $u(0,t)=u(\pi,t)=0$ and is in the rest position at $t=0$: $u(x,0)=0$ but has initial velocity
+$\frac{\partial u}{\partial t}(0,x)=\sin^3(x)=\frac{3}{4}\sin x-\frac{1}{4}\sin 3x$.
+We choose the Ansatz $u(x,t)=X(x)T(t)$:
+
+\begin{align*}
+    \begin{matrix}
+        X(x)T''(t)=X''(x)T(x) & |\div X(x)T(t) \\
+        T''(t)\div T(t) = X''(x)\div X(x) = \mu
+    \end{matrix} \\
+\end{align*}
+
+Hence, we receive the ODEs
+
+\begin{align*}
+    \mu T(t) = T''(t) \\
+    \mu X(x) = X''(x)
+\end{align*}
+
+with $\mu < 0$ to receive oscillating solutions, the ODEs have the solutions
+
+\begin{align*}
+    X(x) & = C \sin(\sqrt\mu x)+\cancel{ D\cos(\sqrt\mu x) } \\
+    T(t) & = A \sin(\sqrt\mu t)+B \cos(\sqrt\mu t)
+\end{align*}
+
+by taking into account the boundary conditions $X(0)=X(\pi)=0$, yielding $C=1,D=0$ and $\sqrt{n}\in\mathbb{N}$.
+Therefore, we have the general solution
+
+\begin{align*}
+    u(x,t) & = \sum_{n=1}^\infty \sin(nx)\cdot\left( A_n\sin(nt)+B_n\cos(nt) \right) \\
+    \ & = \sum_{n=1}^\infty A_n\sin(nx)\sin(nt) + \sum_{n=1}^\infty B_n\sin(nx)\cos(nt)
+\end{align*}
+
+considering the boundary conditions:
+
+\begin{align*}
+    u(x,0) = 0 = \sum_{n=1}^\infty B_n\sin(nx)\underbrace{\cos(0)}_{=1} \Rightarrow B_n=0
+\end{align*}
+
+and
+
+\begin{align*}
+    \ & \frac{\partial u}{\partial t} = \sum_{n=1}^\infty nA_n\sin(nx)\cos(nt)\\
+    \ & \rightarrow \frac{\partial u}{\partial t}(x,0) = \sum_{n=1}^\infty nA_n\sin(nx) = \frac{3}{4}\sin x-\frac{1}{4}\sin 3x \\
+    \ & \Rightarrow A_1=3/4, A_3=-1/12, A_{n\setminus \{1,3\}}=0 \\
+    \ & \Rightarrow u(x,t)=(3/4)\sin(x)\sin(t)-(1/12)\sin(3x)\sin(3t)
+\end{align*}

@@ -11,25 +11,25 @@
 \usepackage{cancel}
 
 \ifthenelse{\lengthtest { \paperwidth = 11in}}
-    { \geometry{top=.3in,left=.3in,right=.3in,bottom=.3in} }
-	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
-		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
-	}
+{ \geometry{top=.3in,left=.3in,right=.3in,bottom=.3in} }
+{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+}
 \pagestyle{empty}
 \makeatletter
 \renewcommand{\section}{\@startsection{section}{1}{0mm}%
-                                {-1ex plus -.5ex minus -.2ex}%
-                                {0.5ex plus .2ex}%x
-                                {\normalfont\large\bfseries}}
+{-1ex plus -.5ex minus -.2ex}%
+{0.5ex plus .2ex}%x
+{\normalfont\large\bfseries}}
 \renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
-                                {-1explus -.5ex minus -.2ex}%
-                                {0.5ex plus .2ex}%
-                                {\normalfont\normalsize\bfseries}}
+{-1explus -.5ex minus -.2ex}%
+{0.5ex plus .2ex}%
+{\normalfont\normalsize\bfseries}}
 \renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
-                                {-1ex plus -.5ex minus -.2ex}%
-                                {1ex plus .2ex}%
-                                {\normalfont\small\bfseries}}
+{-1ex plus -.5ex minus -.2ex}%
+{1ex plus .2ex}%
+{\normalfont\small\bfseries}}
 \renewcommand{\arraystretch}{1.3}
 \makeatother
 \setcounter{secnumdepth}{0}
@@ -42,345 +42,27 @@
 \title{Partial Differential Equations}
 
 \begin{document}
+    \raggedright
+    \footnotesize
 
-\raggedright
-\footnotesize
+    \begin{center}
+        \textbf{Partial Differential Equations} \\
+    \end{center}
+    \begin{multicols}{3}
+        \setlength{\premulticols}{1pt}
+        \setlength{\postmulticols}{1pt}
+        \setlength{\multicolsep}{1pt}
+        \setlength{\columnsep}{2pt}
 
-\begin{center}
-     \textbf{Partial Differential Equations} \\
-\end{center}
-\begin{multicols}{3}
-\setlength{\premulticols}{1pt}
-\setlength{\postmulticols}{1pt}
-\setlength{\multicolsep}{1pt}
-\setlength{\columnsep}{2pt}
+        \input{Domain}
+        \input{Classification}
+        \input{Quasilinear}
+        \section{Linear PDEs}\label{sec:linear-pdes}
+        \input{Separation}
+        \input{Transformation}
 
-\section{Domain and Boundary}
-\begin{itemize}
-	\item Domain $\Omega$ is an open subset of $\mathbb{R}^n$ (meaning all points are interior points)
-	\item Boundary has to meet conditions:
-	\item{ \emph{Dirichlet boundary conditions}: specify values $u$ on $\partial\Omega$: \\
-		$u(x) = f(x)\ \forall x\in\partial\Omega$
-	}
-	\item{\emph{Neumann boundary conditions}: specify derivatives of $u$ on boundary.
-		Only derivatives orthogonal to the boundary give additional information: \\
-		normal derivative: $\frac{\partial u}{\partial n} = g(x)\ \forall x\in\partial\Omega$
-	}
-\end{itemize}
-
-\section{Classification}
-\begin{center}
-  \makebox[\columnwidth]{\includegraphics[width=0.9\columnwidth]{images/decision-tree}}
-\end{center}
-
-\subsection{Linearity}
-Given an equation involving function $u(x), x\in\mathbb{R}$ and its derivatives,
-there is a function $F$ describing the relation:
-\begin{align*}
-	F\left(
-	\begin{matrix}
-		x,y,z,p,q,s,t,r,\ldots \\
-		\downarrow \text{(corresponding to)}\downarrow \\
-		x, y, u, \frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}, \frac{\partial^2 u}{\partial x^2},
-		\frac{\partial^2 u}{\partial x\partial y},\frac{\partial^2 u}{\partial y^2}, \ldots
-	\end{matrix}
-	\right) = 0
-\end{align*}
-(common variable names $p_i\rightarrow\frac{\partial u}{\partial x_i}$ and
-$t_{ij} \rightarrow\frac{\partial^2 u}{\partial x_i\partial x_j}$)
-
-A PDE is \emph{linear} when function $F$ is linear in $u,p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
-
-A PDF is \emph{quasilinear} when function $F$ is linear in $p_1,\ldots,p_n,t_{11},\ldots,t_{nn},\ldots.$
-
-For example, given the heat equation $u_t=\kappa u_{xx}$, $F$ would be $F(p_1,t_{22})=p_1-\kappa t_{22}$.
-
-\subsection{2\textsuperscript{nd} Order PDEs: Symbol Matrix}
-
-The symbol matrix of the 2\textsuperscript{nd} order partial differential operator
-
-\begin{align*}
-	L=\sum_{i,j=1}^{n}a_{ij}(x)\frac{\partial^2}{\partial x_i \partial x_j}+\sum_{i=1}^n b_i(x)\frac{\partial}{\partial x_i}+c(x)
-\end{align*}
-
-is the symmetric matrix
-
-\begin{align*}
-	A=
-	\begin{bmatrix}
-		a_{11} & a_{12} & \ldots & a_{1n} \\
-		a_{21} & a_{22} & \ldots & a_{2n} \\
-		\vdots & \vdots & \ddots & \vdots \\
-		a_{n1} & a_{n2} & \ldots & a_{nn}
-	\end{bmatrix}
-\end{align*}
-
-For example:
-
-\begin{center}
-  \makebox[\columnwidth]{\includegraphics[width=0.9\columnwidth]{images/symbol-matrix}}
-\end{center}
-
-The type of equation can be inferred by the sign of the eigenvalues $\lambda_1,\ldots,\lambda_n$ of the symbol matrix. 
-Calculating the determinant ($\det A=\prod_i \lambda_i$) and trace ($\mathrm{tr}\ A=\sum_i \lambda_i$)
-reveals information about the signs of its eigenvalues:
-
-\subsubsection{Two Variables of PDE}
-
-\begin{align*}
-\det A
-\left\{
-\begin{matrix}
-	>0 & \text{elliptic (eigenvalues have same sign)} \\
-	=0 & \text{parabolic (at least one eigenvalue is zero)} \\
-	<0 & \text{hyperbolic (eigenvalues have opposite sign)}
-\end{matrix}
-\right.
-\end{align*}
-
-\subsubsection{Three Variables of PDE}
-
-\begin{align*}
-	\mathrm{rank}\ A < 2 & \Rightarrow \text{not classified} \\
-	\det A\text{ and }\mathrm{tr}\ A\text{ have different sign} & \Rightarrow\text{hyperbolic} \\
-	\det A=0\text{, semidefinite (Cholesky decomp.)} & \Rightarrow\text{parabolic} \\
-	A\text{ or }-A\text{ positive definite (Cholesky)} & \Rightarrow\text{elliptic} \\
-	\text{all other cases} & \Rightarrow\text{hyperbolic}
-\end{align*}
-
-\section{Quasilinear PDEs}
-
-\subsection{Characteristics}
-
-\begin{wrapfigure}{r}{0.4\columnwidth}
-    \centering
-    \includegraphics[width=0.4\columnwidth]{images/quasilinear}
-\end{wrapfigure}
-
-The PDE
-
-\begin{align*}
-	a(x,y,u)\frac{\partial u}{\partial x}+b(x,y,u)\frac{\partial u}{\partial y} = c(x,y,u)
-\end{align*}
-
-can be written in vector notation:
-
-\begin{align*}
-  {\color{green}
-    \underbrace{
-      \begin{pmatrix}
-        a(x,y,u) \\
-        b(x,y,u) \\
-        c(x,y,u)
-      \end{pmatrix}
-    }_{\vec t}
-  }
-  \cdot
-  {\color{black}
-    \underbrace{
-      \begin{pmatrix}
-        \frac{\partial u}{\partial x}\\
-        \frac{\partial u}{\partial y}\\
-        -1
-      \end{pmatrix}
-    }_{\vec{n}}
-  }
-  &= 0
-\end{align*}
-
-where $\color{black}\vec{n}$ is a normal vector and $\color{green}\vec{t}$ is always tangential to the solution surface.
-Therefore, we can elaborate a solution algorithm:
-\begin{enumerate}
-	\item{
-		Using the Cauchy initial curve, we formulate
-		\begin{align*}
-			\vec{v}(s) = \begin{pmatrix}
-				v_x({\color{red}s} ) & v_y({\color{red}s}) & v_z({\color{red}s})
-			\end{pmatrix}^T
-		\end{align*}
-		which is a point on the initial curve, parameterised by $s$.
-	}
-	\item{
-		Find characteristic curves as solution of the ODEs
-		
-		\begin{align*}
-			\frac{d}{d{\color{blue}t}}
-			\begin{bmatrix}
-				x({\color{blue}t}, {\color{red}s}) \\
-				y({\color{blue}t}, {\color{red}s}) \\
-				z({\color{blue}t}, {\color{red}s})
-			\end{bmatrix}
-			=
-			\begin{bmatrix}
-				a(x({\color{blue}t},{\color{red}s}), y({\color{blue}t},{\color{red}s}), z({\color{blue}t}, {\color{red}s})) \\
-				b(x({\color{blue}t},{\color{red}s}), y({\color{blue}t},{\color{red}s}), z({\color{blue}t}, {\color{red}s})) \\
-				c(x({\color{blue}t},{\color{red}s}), y({\color{blue}t},{\color{red}s}), z({\color{blue}t}, {\color{red}s}))
-			\end{bmatrix}
-		\end{align*}
-		with
-		\begin{align*}
-			\begin{bmatrix}
-				x({\color{blue}0}, {\color{red}s}) \\
-				y({\color{blue}0}, {\color{red}s}) \\
-				z({\color{blue}0}, {\color{red}s})
-			\end{bmatrix}
-			=
-			\vec{v}({\color{red}s})
-			=
-			\begin{bmatrix}
-				v_x({\color{red}s} ) \\
-				v_y({\color{red}s}) \\
-				v_z({\color{red}s})
-			\end{bmatrix}
-		\end{align*}
-	}
-	\item{
-		Eliminate the variables {\color{blue}t} and {\color{red}s} and condense solution into a function $u(x, y)$:
-		\begin{align*}
-			\left.
-			\begin{matrix}
-				x=x({\color{blue}t},{\color{red}s}) \\
-				y=y({\color{blue}t},{\color{red}s}) \\
-				u=z({\color{blue}t},{\color{red}s})
-			\end{matrix}
-			\ \ \right\}
-			\ u=u(x,y)
-		\end{align*}
-	}
-\end{enumerate}
-
-\section{Linear PDEs}
-\subsection{Separation}
-
-Conditions when separation may be successful:
-
-\begin{itemize}
-	\item Homogeneous, linear PDE
-	\item Homogeneous boundary conditions
-	\item Domain must be a cartesian product (i.e. some form of rectangle when in cartesian coordinate system)
-\end{itemize}
-
-if these are given, we can try:
-
-\begin{enumerate}
-	\item Assume the structure of the solution to be in the form of some ansatz with separable variables, usually a product $u(x,y)=X(x)\cdot Y(y)$
-	\item{
-		Substitute $u$ in PDE with ansatz by variable:
-		\begin{align*}
-			\text{all terms of }x = \text{all terms of }y = {\color{red}\lambda}
-		\end{align*}
-		and solve the ordinary differential equations for $X(x)$ and $Y(y)$.
-	}
-	\item Use \emph{homogeneous} boundary conditions to determine admissible values ${\color{red}\lambda}_k$.
-	\item Solve equations: $X_k(x)$ and $Y_k(y)$ $\Rightarrow u_k(x,y)=X_k(x)\cdot Y_k(y)$ using ansatz.
-	\item Combine solutions: $u(x,y)=\sum_{k\in \mathbb{Z}}\left(a_ku_k(x,y)\right)$
-	\item Use remaining boundary conditions to determine $a_k$.
-\end{enumerate}
-
-\paragraph{Separation Example}
-
-Given the wave equation $\frac{\partial^2u}{\partial t^2}=\frac{\partial^2 u}{\partial x^2}$
-for a string mounted between $u(0,t)=u(\pi,t)=0$ and is in the rest position at $t=0$: $u(x,0)=0$ but has initial velocity
-$\frac{\partial u}{\partial t}(0,x)=\sin^3(x)=\frac{3}{4}\sin x-\frac{1}{4}\sin 3x$. We choose the Ansatz $u(x,t)=X(x)T(t)$:
-
-\begin{align*}
-	\begin{matrix}
-		X(x)T''(t)=X''(x)T(x) & |\div X(x)T(t) \\
-		T''(t)\div T(t) = X''(x)\div X(x) = \mu
-	\end{matrix} \\
-\end{align*}
-
-Hence, we receive the ODEs
-
-\begin{align*}
-	\mu T(t) = T''(t) \\
-	\mu X(x) = X''(x)
-\end{align*}
-
-with $\mu < 0$ to receive oscillating solutions, the ODEs have the solutions
-
-\begin{align*}
-	X(x) & = C \sin(\sqrt\mu x)+\cancel{ D\cos(\sqrt\mu x) } \\
-	T(t) & = A \sin(\sqrt\mu t)+B \cos(\sqrt\mu t)
-\end{align*}
-
-by taking into account the boundary conditions $X(0)=X(\pi)=0$, yielding $C=1,D=0$ and $\sqrt{n}\in\mathbb{N}$.
-Therefore, we have the general solution
-
-\begin{align*}
-	u(x,t) & = \sum_{n=1}^\infty \sin(nx)\cdot\left( A_n\sin(nt)+B_n\cos(nt) \right) \\
-	\ & = \sum_{n=1}^\infty A_n\sin(nx)\sin(nt) + \sum_{n=1}^\infty B_n\sin(nx)\cos(nt)
-\end{align*}
-
-considering the boundary conditions:
-
-\begin{align*}
-	u(x,0) = 0 = \sum_{n=1}^\infty B_n\sin(nx)\underbrace{\cos(0)}_{=1} \Rightarrow B_n=0
-\end{align*}
-
-and
-
-\begin{align*}
-	\ & \frac{\partial u}{\partial t} = \sum_{n=1}^\infty nA_n\sin(nx)\cos(nt)\\
-	\ & \rightarrow \frac{\partial u}{\partial t}(x,0) = \sum_{n=1}^\infty nA_n\sin(nx) = \frac{3}{4}\sin x-\frac{1}{4}\sin 3x \\
-	\ & \Rightarrow A_1=3/4, A_3=-1/12, A_{n\setminus \{1,3\}}=0 \\
-	\ & \Rightarrow u(x,t)=(3/4)\sin(x)\sin(t)-(1/12)\sin(3x)\sin(3t)
-\end{align*}
-
-\subsection{Transformation}
-\begin{enumerate}
-	\item{
-		Transform equation: derivatives turn into algebraic expressions:
-		\begin{align*}
-			\left(
-			\mathcal{L}\frac{\partial u(t,y)}{\partial t}
-			\right)(s) = 
-			s
-			\underbrace{(\mathcal{L}f)(s, y)}_{=y_s(y)}
-			-u(0,y)
-		\end{align*}
-	}
-	\item{
-		Transform y-boundary conditions: gives boundary conditions for
-		\begin{align*}
-			 u(t,0) & =g(t) \\
-			 y_s(0)=(\mathcal{L}u(t,0))(s) & = (\mathcal{L}g)(s)
-		\end{align*}
-	}
-	\item Solve PDE with fewer derivatives, ODEs
-	\item Inverse transform
-\end{enumerate}
-
-\subsubsection{Laplace Transform}
-
-The Laplace transform of a function $f:\mathbb{R}^+\to \mathbb{R}$ is the function
-
-\begin{align*}
-	\mathcal{L}f : \mathbb{R}^+\to \mathbb{R} : s \rightarrowtail \mathcal{L}f(s) = \int_0^\infty f(t)e^{-st}\ dt
-\end{align*}
-
-\subsubsection{Fourier Transform}
-
-For $f : \mathbb{R}\to\mathbb{C} : x \rightarrowtail f(x)$ the Fourier transform of $f$ is defined as
-
-\begin{align*}
-	\mathcal{F}f = \hat{f} : \mathbb{R}\to\mathbb{C} : k\rightarrowtail 
-	\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\hat{f}(k)e^{-ikx}\ dx
-\end{align*}
-
-The function $f$ can be recovered from $\hat{f}$ by
-
-\begin{align*}
-	f(x)=(\mathcal{F}^{-1}\hat{f})(x)
-	= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat{f}(k) e^{ikx}\ dk
-\end{align*}
-
-\input{NumericalMethods.tex}
-
-\newpage
-
-\input{CheatSheet.tex}
-
-\end{multicols}
-
+        \input{NumericalMethods}
+        \newpage
+        \input{CheatSheet}
+    \end{multicols}
 \end{document}

@@ -1,0 +1,69 @@
+\subsection{Transformation}\label{subsec:transformation}
+\begin{enumerate}
+    \item{
+        Transform equation: derivatives turn into algebraic expressions:
+        \begin{align*}
+            \left(
+            \mathcal{L}\frac{\partial u(t,y)}{\partial t}
+            \right)(s) =
+            s
+            \underbrace{(\mathcal{L}f)(s, y)}_{=y_s(y)}
+            -u(0,y)
+        \end{align*}
+    }
+    \item{
+        Transform y-boundary conditions: gives boundary conditions for
+        \begin{align*}
+            u(t,0) & =g(t) \\
+            y_s(0)=(\mathcal{L}u(t,0))(s) & = (\mathcal{L}g)(s)
+        \end{align*}
+    }
+    \item Solve PDE with fewer derivatives, ODEs
+    \item Inverse transform
+\end{enumerate}
+
+\subsubsection{Laplace Transform}
+
+(Only works on linear equations.)
+The Laplace transform of a function $f:\mathbb{R}^+\to \mathbb{R}$ is the function
+
+\begin{align*}
+    \mathcal{L}f : \mathbb{R}^+\to \mathbb{R} : s \rightarrowtail \mathcal{L}f(s) = \int_0^\infty f(t)e^{-st}\ dt
+\end{align*}
+
+It is linear:
+
+\begin{align*}
+	\mathcal{L}(\alpha f+\beta f)=\alpha\mathcal{L}f+\beta\mathcal{L}f
+\end{align*}
+
+Example transformations:
+\begin{align*}
+	\begin{matrix}
+		\text{Constant: } & \text{Exponential: } & \text{Derivative: } \\
+		f(t)=c & f(t)=e^{-ct} & f(t)=g^{(n)}(t) \\
+		(\mathcal{L}f)(s) = \frac{c}{s} & (\mathcal{L}f)(s) = \frac{1}{c+s} & (\mathcal{L}f^{(n)})(s)= \\
+		& & -f^{(n-1)}(0)+s\left(\mathcal{L}f^{(n-1)}\right)(s) \\
+		& & \text{(removes t-derivatives: }\frac{\partial}{\partial t}\rightarrow s\text{)}
+	\end{matrix}
+\end{align*}
+
+\subsubsection{Fourier Transform}
+
+For $f : \mathbb{R}\to\mathbb{C} : x \rightarrowtail f(x)$ the Fourier transform of $f$ is defined as
+
+\begin{align*}
+    \mathcal{F}f = \hat{f} : \mathbb{R}\to\mathbb{C} : k\rightarrowtail
+    \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}\hat{f}(k)e^{-ikx}\ dx
+\end{align*}
+
+It turns the derivative $\frac{\partial}{\partial x}$ into a multiplication by $-ik$ (second derivatives are reduced to $i^2=-1$):
+\begin{align*}
+	(\mathcal{F}f^{(n)})(k) = (ik)^n\mathcal{F}f(k)
+\end{align*}
+
+The function $f$ can be recovered from $\hat{f}$ by
+\begin{align*}
+    f(x)=(\mathcal{F}^{-1}\hat{f})(x)
+    = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat{f}(k) e^{ikx}\ dk
+\end{align*}
