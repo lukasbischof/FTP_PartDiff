@@ -1,0 +1,46 @@
+\section{PDEs of Second Order}
+
+Linear PDEs of second order have the form
+\begin{align*}
+	\sum_{i,j=1}^n a_{ij}\frac{\partial ^2}{\partial x_i\partial x_j}u+\sum_{i=1}^nb_i\frac{\partial}{\partial x_i}u + cu = f
+\end{align*}
+
+The equations fall into these categories: 
+\emph{Elliptic} (potential problem), \emph{parabolic} (heat equation, diffusion)
+and \emph{hyperbolic} (wave equation, linearised supersonic flow).
+
+\subsection{Splitting the Solution}
+
+Given a second order linear differential operator $L$,
+we have the PDE $Lu = f \text{ in }\Omega$ with $u = g \text{ on }\partial\Omega$.
+
+\begin{enumerate}
+	\item We try to find a particular solution {\color{blue}$Lu_p = f$ in $\Omega$}, satisfying only the PDE and neglecting boundary conditions
+	\item{
+		To solve the original problem,
+		we need an additional summand $u_r$ taking care of boundary values to receive the solution $u_p + u_r$.
+		However, $u_r$ still needs to solve the PDE but due to linearity, this reduces to a homogeneous problem:
+		\begin{align*}
+			L(u_p + u_r) = f + Lu_r = f \Rightarrow{\color{blue} Lu_r = 0\text{ in }\Omega}
+		\end{align*}
+	}
+	\item{
+		Ensure that the boundary conditions are satisfied:
+		\begin{align*}
+			u_p+u_r = g \Rightarrow {\color{blue}u_r = g - u_p\text{ on }\partial\Omega}
+		\end{align*}
+	}
+	\item{
+		If the solution is not unique, we're able to find other solutions using an additional term $u_h$:
+		\begin{align*}
+			L(u_p + u_r + u_h) = f + Lu_h &\ \Rightarrow Lu_h = 0\text{ in }\Omega \\
+			u_p + u_r + u_h = g + u_h &\ \Rightarrow u_h = 0\text{ on }\partial\Omega
+		\end{align*}
+	}
+\end{enumerate}
+
+For example, consider the PDE $\nabla^2 u = 4$ in $\Omega = \{(x,y)\ |\ x^2 + y^2 < 1\}$ and $u = 0.5x+0.5$ on $\partial\Omega$.
+This has the particular solution $u_p(x,y)=x^2+y^2$. 
+To fix boundary conditions, we find a solution $u_r$ of the homogeneous problem with boundary values
+$u_r = 0.5x + 0.5 - u_p(x,y) = 0.5x + 0.5 - \underbrace{1}_{\text{on }\partial\Omega} = 0.5x - 0.5$ giving the complete solution
+$u(x,y) = u_p(x,y) + u_r(x,y) = x^2 + y^2 + 0.5x - 0.5$.

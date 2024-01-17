@@ -25,7 +25,12 @@
 	\sin 2\theta & = 2\sin\theta\cos\theta \\
 	\cos 2\theta & = 2\cos^2\theta - \sin^2\theta = 2\cos^2\theta - 1 = 1 - 2\sin^2\theta \\
 	\sin(\alpha \pm \beta) & = \sin\alpha\cos\beta\pm\cos\alpha\sin\beta \\
-	\cos(\alpha\pm\beta) & = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta
+	\cos(\alpha\pm\beta) & = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta \\
+	\sinh x & = \frac{e^x - e^{-x}}{2}=\frac{e^{2x}-1}{2e^x} \\
+	\cosh x & = \frac{e^x + e^{-x}}{2} = \frac{e^{2x}+1}{2e^x} \\
+	\tanh x & = \sinh x \div \cosh x \\
+	\coth x & = \cosh x \div \sinh x \\
+	\mathrm{sech}\ x & = 1 \div \cosh x = 2 \div (e^x+e^{-x})
 \end{align*}
 
 \subsection{Derivatives}
@@ -96,3 +101,13 @@ Special case where $a(x)=a=\mathrm{const.}$ and $b(x)=b=\mathrm{const.}$:
 	$f''(x) = -c\cdot f(x)$ & $\Rightarrow$ & $f(x)=k_1\sin(\sqrt{c}x)+k_2\cos(\sqrt{c}x)$ \\
 	$f'(x)+af(x) = b$ & $\Rightarrow$ & $f(x) = \left(f(0)-\frac{b}{a}\right)e^{-ax}+\frac{b}{a}$
 \end{tabular}
+
+\subsection{Harmonic Function}
+
+A function is harmonic if it fulfils $\Delta f = 0$.
+The Laplace operator in polar coordinates is
+\begin{align*}
+	\Delta u = \frac{1}{r}\frac{\partial}{\partial r}
+	\left(r\frac{\partial u}{\partial r}\right)
+	+\frac{1}{r^2}\frac{\partial^2 u}{\partial \varphi^2}
+\end{align*}
