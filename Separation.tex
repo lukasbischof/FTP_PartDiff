@@ -38,35 +38,29 @@ We choose the Ansatz $u(x,t)=X(x)T(t)$:
         T''(t)\div T(t) = X''(x)\div X(x) = \mu
     \end{matrix} \\
 \end{align*}
-
 Hence, we receive the ODEs
 
 \begin{align*}
     \mu T(t) = T''(t) \\
     \mu X(x) = X''(x)
 \end{align*}
-
 with $\mu < 0$ to receive oscillating solutions, the ODEs have the solutions
 
 \begin{align*}
     X(x) & = C \sin(\sqrt\mu x)+\cancel{ D\cos(\sqrt\mu x) } \\
     T(t) & = A \sin(\sqrt\mu t)+B \cos(\sqrt\mu t)
 \end{align*}
-
 by taking into account the boundary conditions $X(0)=X(\pi)=0$, yielding $C=1,D=0$ and $\sqrt{n}\in\mathbb{N}$.
 Therefore, we have the general solution
-
 \begin{align*}
     u(x,t) & = \sum_{n=1}^\infty \sin(nx)\cdot\left( A_n\sin(nt)+B_n\cos(nt) \right) \\
     \ & = \sum_{n=1}^\infty A_n\sin(nx)\sin(nt) + \sum_{n=1}^\infty B_n\sin(nx)\cos(nt)
 \end{align*}
 
 considering the boundary conditions:
-
 \begin{align*}
     u(x,0) = 0 = \sum_{n=1}^\infty B_n\sin(nx)\underbrace{\cos(0)}_{=1} \Rightarrow B_n=0
 \end{align*}
-
 and
 
 \begin{align*}
