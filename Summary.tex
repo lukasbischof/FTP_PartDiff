@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{cancel}
+\usepackage[x11names]{xcolor}
 
 \ifthenelse{\lengthtest { \paperwidth = 11in}}
 { \geometry{top=.3in,left=.3in,right=.3in,bottom=.3in} }
@@ -37,6 +38,11 @@
 \setlength{\parskip}{0pt plus 0.5ex}
 \setlength{\mathindent}{0pt}
 \setlength{\columnseprule}{0.2pt}
+
+
+\renewcommand{\CancelColor}{\color{purple}}
+\newcommand{\utild}{\tilde{u}}
+
 % -----------------------------------------------------------------------
 
 \title{Partial Differential Equations}
@@ -64,6 +70,8 @@
         \input{Elliptic}
 
         \input{NumericalMethods}
+        \input{FDMElliptic}
+        \input{FEM}
         \newpage
         \input{CheatSheet}
     \end{multicols}
