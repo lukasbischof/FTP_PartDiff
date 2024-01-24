@@ -70,3 +70,43 @@ ultimately giving the equation in matrix form (optional):
 \end{align*}
 
 giving the approximation vector $\utild \approx (0.4, 0.83, 1.34)$.
+
+\subsection{Two-Dimensions Example}
+
+We have Poisson's differential equation $-\Delta u(x,y)=f(x,y)$ with
+$f(x,y) = \left( (3x+x^2)\cdot y(1-y) + (3y+y^2)\cdot x(1-x) \right)\cdot e^{x+y}$ on
+$\Omega = [0,1]\times [0,1]$ with homogeneous boundary conditions.
+Setting $h=\Delta x = \Delta y = \frac{1}{3}$, we can use the discrete Laplace operator.
+Discretisation of the geometry yields
+\makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/fdm_elliptic_2d}}
+
+and we can define for each inner node an equation:
+\begin{align*}
+	u_1 & : -\frac{\utild_2 + \utild_3 + \cancelto{0}{y_1} + \cancelto{0}{x_1} - 4\utild_1}{\cancelto{(1/3)^2}{1/h^2}} = f(1/3, 1/3) = f_1 \\
+	u_2 & : -\frac{0 + \utild_4 + \utild_1 + 0 - 4\utild_2}{(1/3)^2} = f(2/3, 1/3) = f_2 \\
+	u_3 & : -\frac{\utild_4 + 0 + 0 + \utild_1 - 4\utild_3}{(1/3)^2} = f(1/3, 2/3) = f_3 \\
+	u_4 & : -\frac{0 + 0 + \utild_3 + \utild_2 - 4\utild_4}{(1/3)^2} = f(2/3, 2/3) = f_4 \\
+\end{align*}
+
+giving the linear system:
+\begin{align*}
+	-9\cdot\begin{bmatrix}
+		{\color{blue}-4} & {\color{blue}1} & {\color{purple}1} & {\color{purple}0} \\
+		{\color{blue}1} & {\color{blue}-4} & {\color{purple}0} & {\color{purple}1} \\
+		{\color{purple}1} & {\color{purple}0} & {\color{blue}-4} & {\color{blue}1} \\
+		{\color{purple}0} & {\color{purple}1} & {\color{blue}1} & {\color{blue}-4}
+	\end{bmatrix}
+	\begin{bmatrix}
+		\utild_1 \\
+		\utild_2 \\
+		\utild_3 \\
+		\utild_4
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		f_1 \\
+		f_2 \\
+		f_3 \\
+		f_4
+	\end{bmatrix}
+\end{align*}

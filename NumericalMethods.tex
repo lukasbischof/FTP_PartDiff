@@ -19,5 +19,11 @@
 \\
 Setting $h = \Delta x = \Delta y$, then $\nabla^2u$ is
 \begin{align*}
-	\frac{1}{h^{2}}\left(u(x+h,y)+u(x,y+h)+u(x-h,y)+u(x,y-h)-4u(x,y)\right)
+	\frac{1}{h^{2}}\left(
+	\underbrace{u(x+h,y)}_{\text{East}}
+	+ \underbrace{u(x,y+h)}_{\text{North}}
+	+ \underbrace{u(x-h,y)}_{\text{West}}
+	+ \underbrace{u(x,y-h)}_{\text{South}}
+	- \underbrace{4u(x,y)}_\text{Center}
+	\right)
 \end{align*}
