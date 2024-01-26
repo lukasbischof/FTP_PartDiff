@@ -47,7 +47,7 @@ We only receive a good approximation if the steps are small enough to ``catch'' 
 \textbf{Given} the heat equation $\frac{\partial u}{\partial t}(x,t) = \frac{\partial^2 u}{\partial x^2}(x,t)$
 for the domain $\Omega = [0,1]\times [0, \infty[$ with the boundary conditions
 $u(x,0) = e^x$, $u(0,t) = e^t$ and $u(1,t) = e^{1+t}$, we want to find an approximation $\utild$ for points
-$(1/3,2/3),(2/3,2/3)$ using $\Delta x = 1/3$ and $\Delta t = 1/3$.
+$(\sfrac{1}{3},\sfrac{2}{3}),(\sfrac{2}{3},\sfrac{2}{3})$ using $\Delta x = \sfrac{1}{3}$ and $\Delta t = \sfrac{1}{3}$.
 
 \textbf{Discretisation of Heat Equation}:
 \begin{align*}
@@ -68,7 +68,7 @@ $(1/3,2/3),(2/3,2/3)$ using $\Delta x = 1/3$ and $\Delta t = 1/3$.
 
 and thus, for $\mathbf{k+1=1}$:
 \begin{align*}
-	\utild_1^{(1)} & = 3\cancelto{1}{\utild_0^{(0)}} - 5\cancelto{e^{1/3}}{\utild_1^{(0)}} + 3\cancelto{e^{2/3}}{\utild_2^{(0)}} {\color{gray} = 1.8651} \\
+	\utild_1^{(1)} & = 3\cancelto{1}{\utild_0^{(0)}} - 5\cancelto{e^{\sfrac{1}{3}}}{\utild_1^{(0)}} + 3\cancelto{e^{\sfrac{2}{3}}}{\utild_2^{(0)}} {\color{gray} = 1.8651} \\
 	\utild_2^{(1)} & = 3\utild_1^{(0)} - 5\utild_2^{(0)} + 3\utild_3^{(0)} {\color{gray} = 2.603}
 \end{align*}
 
@@ -117,8 +117,8 @@ and
 	\end{bmatrix}
 	+
 	3\begin{bmatrix}
-		e^{1/3} \\
-		e^{4/3}
+		e^{\sfrac{1}{3}} \\
+		e^{\sfrac{4}{3}}
 	\end{bmatrix}
 	{\color{gray}
 		=
@@ -127,4 +127,114 @@ and
 			3.9614
 		\end{bmatrix}
 	}
+\end{align*}
+
+\subsection{Richardson's \emph{Implicit} Scheme}
+
+Uses a backward finite difference for the discretisation in $t$:
+\begin{align*}
+	\frac{\partial u}{\partial t} \approx \frac{u(x,t) - u(x, t-\Delta t)}{\Delta t}
+\end{align*}
+to be able to consider all boundary points.
+We therefore look for a matrix $E$ to receive a system of linear equations:
+\begin{align*}
+	E\cdot \utild^{(k+1)} = \utild^{(k)}
+\end{align*}
+and get a solution by inverting (of course not suitable for numerical tasks, only theoretical):
+\begin{align*}
+	\utild^{(k+1)} = \left(E^{(n)}\right)^{-1}\cdot\utild^{(k)}
+\end{align*}
+
+The method is stable independently of $r$ (absolute stability).
+
+\subsubsection{Example}
+
+\textbf{Given} the heat equation $\frac{\partial u}{\partial t}(x,t) = \frac{\partial^2 u}{\partial x^2}(x,t)$
+for the domain $\Omega = [0,2]\times [0, \infty[$ with boundary condition
+$u(x,0) = \sin\left(\frac{\pi x}{2}\right)$. We want to find $\utild(x,0.1)$ using $\Delta x = 0.5$ and $\Delta t = 0.05$.
+\\[1em]
+\textbf{Discretisation of Heat Equation}
+analogously like in the explicit method:
+\begin{align*}
+	\tilde{u}_{j}^{(k)}=-r\cdot\utild_{j-1}^{(k+1)}+(1+2\cdot r)\cdot\tilde{u}_{j}^{(k+1)}-r\cdot\tilde{u}_{j+1}^{(k+1)}
+\end{align*}
+
+\textbf{Discretisation of Geometry}
+
+\makebox[\columnwidth]{\includegraphics[width=\columnwidth]{images/richardson_implicit}}
+
+\textbf{Solution}
+
+For $k=0$:
+\begin{align*}
+	\mathbf{j=1} : & -\cancelto{\frac{1}{5}}{r}\cdot\cancelto{\color{cyan}0}{\utild_{0}^{(1)}} + \sfrac{7}{5}\cdot\utild_1^{(1)} - \cancelto{\frac{1}{5}}{r}\cdot\utild_2^{(1)} = f(\sfrac{1}{2}) = {\color{cyan}\sfrac{1}{\sqrt{2}}} \\
+	\mathbf{j=2} : & -\cancelto{\frac{1}{5}}{r}\cdot\utild_{1}^{(1)} + \sfrac{7}{5}\cdot\utild_2^{(1)} - \cancelto{\frac{1}{5}}{r}\cdot\utild_3^{(1)} = f(1) = {\color{cyan}1} \\
+	\mathbf{j=3} : & -\cancelto{\frac{1}{5}}{r}\cdot\utild_{2}^{(1)} + \sfrac{7}{5}\cdot\utild_3^{(1)} - \cancelto{\frac{1}{5}}{r}\cdot\cancelto{\color{cyan}0}{\utild_4^{(1)}} = f(\sfrac{3}{2}) = {\color{cyan}\sfrac{1}{\sqrt{2}}} \\
+\end{align*}
+
+resulting in the linear system
+\begin{align*}
+	\underbrace{
+		\begin{bmatrix}
+			\sfrac{7}{5} & -\sfrac{1}{5} & 0 \\
+			-\sfrac{1}{5} & \sfrac{7}{5} & -\sfrac{1}{5} \\
+			0 & -\sfrac{1}{5} & \sfrac{7}{5}
+		\end{bmatrix}
+	}_{E}
+	\begin{bmatrix}
+		\utild_1 \\
+		\utild_2 \\
+		\utild_3 \\
+	\end{bmatrix}^{(1)}
+	=
+	\begin{bmatrix}
+		\sfrac{1}{\sqrt{2}} \\
+		1 \\
+		\sfrac{1}{\sqrt{2}}
+	\end{bmatrix}
+	& \Rightarrow
+	\begin{bmatrix}
+		\utild_1 \\
+		\utild_2 \\
+		\utild_3 \\
+	\end{bmatrix}^{(1)}
+	\approxeq
+	{\color{purple}
+	\begin{bmatrix}
+		0.633 \\
+		0.895 \\
+		0.633
+	\end{bmatrix}
+	} \\
+	\overbrace{
+		\begin{bmatrix}
+			\sfrac{7}{5} & -\sfrac{1}{5} & 0 \\
+			-\sfrac{1}{5} & \sfrac{7}{5} & -\sfrac{1}{5} \\
+			0 & -\sfrac{1}{5} & \sfrac{7}{5}
+		\end{bmatrix}
+	}
+	\begin{bmatrix}
+		\utild_1 \\
+		\utild_2 \\
+		\utild_3 \\
+	\end{bmatrix}^{(2)}
+	= {\color{purple}
+	\begin{bmatrix}
+		0.633 \\
+		0.895 \\
+		0.633
+	\end{bmatrix}
+	}
+	& \Rightarrow
+	\begin{bmatrix}
+		\utild_1 \\
+		\utild_2 \\
+		\utild_3 \\
+	\end{bmatrix}^{(2)}
+	\approxeq
+	\begin{bmatrix}
+		0.567 \\
+		0.801 \\
+		0.567
+	\end{bmatrix}
 \end{align*}
