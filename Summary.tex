@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{cancel}
+\usepackage{framed}
 \usepackage[x11names]{xcolor}
 
 \ifthenelse{\lengthtest { \paperwidth = 11in}}
@@ -39,6 +40,7 @@
 \setlength{\mathindent}{0pt}
 \setlength{\columnseprule}{0.2pt}
 
+\definecolor{shadecolor}{RGB}{200,240,240}
 
 \renewcommand{\CancelColor}{\color{purple}}
 \newcommand{\utild}{\tilde{u}}
@@ -71,6 +73,7 @@
 
         \input{NumericalMethods}
         \input{FDMElliptic}
+        \input{FDMParabolic}
         \input{FEM}
         \newpage
         \input{CheatSheet}
