@@ -1,0 +1,22 @@
+\subsection{Centred Scheme}
+
+Uses a forward difference in $t$ and a centred difference in $x$.
+
+\subsubsection{Example using Advection Equation}
+
+
+\textbf{Discretisation of Operators}
+
+The discrete advection equation for the centred scheme is derived from the discretised equation:
+\begin{align*}
+	{\frac{\tilde{u}(x,t+\Delta t)-\tilde{u}(x,t)}{\Delta t}}+{\frac{\tilde{u}(x+\Delta x,t)-\tilde{u}(x-\Delta x,t)}{2\cdot\Delta x}}=0
+\end{align*}
+
+and has the iterative form (with $\utild_j^{(0)}=f_j$ on $\partial\Omega$):
+
+\colorbox{shadecolor}{$
+	\tilde{u}_{j}^{(k+1)}=-\frac{r}{2}\cdot\tilde{u}_{j+1}^{(k)}+\tilde{u}_{j}^{(k)}+\frac{r}{2}\cdot\tilde{u}_{j-1}^{(k)}
+$}
+
+Solution method is analogous to the upwind and downwind scheme,
+just considering the left and right predecessor as well.
