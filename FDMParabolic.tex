@@ -53,7 +53,7 @@ $(\sfrac{1}{3},\sfrac{2}{3}),(\sfrac{2}{3},\sfrac{2}{3})$ using $\Delta x = \sfr
 \begin{align*}
 	& \frac{u(x,t+\Delta t)-{\color{blue} u(x,t)}}{\color{blue}\Delta t}\approx\frac{u(x+\Delta x,t)-2\cdot u(x,t)+u(x-\Delta x,t)}{\Delta x^{2}} \\
 	& u(x,t+\Delta t)\approx {\color{blue}u(x,t)+\Delta t}\cdot{\frac{u(x+\Delta x,t)-2 u(x,t)+u(x-\Delta x,t)}{\Delta x^{2}}} \\
-	& \utild_{j,k+1}=u_{j,k}+r\cdot u_{j+1,k} - 2u_{j,k} + u_{j-1,k}\quad \left|r=\frac{\Delta t}{\Delta x^2}\right. \\
+	& \utild_{j,k+1}=u_{j,k}+r\cdot u_{j+1,k} - 2u_{j,k} + u_{j-1,k}\quad {\color{gray}\left|\ r=\frac{\Delta t}{\Delta x^2}\right.} \\
 	& \utild_{j,k+1} = r\cdot\utild_{j-1,k}+(1-2r)\utild_{j,k} + r\cdot\utild_{j+1,k}
 \end{align*}
 
@@ -238,3 +238,91 @@ resulting in the linear system
 		0.567
 	\end{bmatrix}
 \end{align*}
+
+\subsection{Crank-Nicolson Scheme}
+
+Averaging the explicit and implicit method of Richardson to improve error term:
+\begin{align*}
+	g^{\prime}(x)={\frac{1}{2}}\cdot\left({\frac{g(x+\Delta x)-g(x)}{\Delta x}}+{\frac{g(x)-g(x-\Delta x)}{\Delta x}}\right)
+	+ \mathcal{O}(\Delta x^{2})
+\end{align*}
+
+The Crank-Nicolson values at time-level $k+1$ are computed by solving the system of linear equations
+\begin{align*}
+	F^{(n)}\cdot\vec{\utild}^{(k+1)} = G^{(n)}\cdot\vec{\utild}^{(k)}
+\end{align*}
+
+which can formally be transformed into the linear iteration
+\begin{align*}
+	\vec{\utild}^{(k+1)}=\left(F^{(n)}\right)^{-1}\cdot G^{(n)}\cdot\vec{\utild}^{(k)}
+\end{align*}
+
+where the matrices $F$ and $G$ are for the heat equation $u_t=u_{xx}$:
+\begin{align*}
+	& F^{(n)}=E^{(n)}+I=\mathrm{tridiag}_{n-1}(-r,2+2\cdot r,-r) \\
+	& G^{(n)}=C^{(n)}+I=\mathrm{tridiag}_{n-1}(r,2-2\cdot r,r)
+\end{align*}
+
+with
+\begin{align*}
+	E^{(n)}=\mathrm{tridiag}_{n-1}(-r,1+2\cdot r,-r)	\quad\text{(from implicit)}
+\end{align*}
+and
+\begin{align*}
+	C^{(n)}=\mathrm{tridiag}_{n-1}(r,1-2\cdot r,r)\quad\text{(from explicit)}
+\end{align*}
+
+\subsubsection{Example}
+
+\textbf{Given} the heat equation $\frac{\partial u}{\partial t}(x,t) = \frac{\partial^2 u}{\partial x^2}(x,t)$
+for the domain $\Omega = [0,3]\times [0, \infty[$ and boundary condition
+$u(x,0) = -25x^2(x-3)$, we want to find $\utild(x,2)$ using $\Delta x = 1$ and $\Delta t = 0.5$.
+
+\textbf{Discretisation of Geometry}
+
+\makebox[\columnwidth]{\includegraphics[width=0.4\columnwidth]{images/crank_nicolson}}
+
+\textbf{Solution}
+
+With $r = \frac{\Delta t}{\Delta x^2} = \frac{\sfrac{1}{2}}{1} = 0.5$, we receive the matrices
+\begin{align*}
+	F = \begin{bmatrix}
+		3 & -0.5 \\
+		-0.5 & 3
+	\end{bmatrix},
+	G = \begin{bmatrix}
+		1 & 0.5 \\
+		0.5 & 1
+	\end{bmatrix}
+\end{align*}
+
+and thus
+\begin{align*}
+	\begin{bmatrix}
+		\utild_1 \\
+		\utild_2
+	\end{bmatrix}^{(k+1)}
+	=
+	F^{-1} G
+	\begin{bmatrix}
+		\utild_1 \\
+		\utild_2
+	\end{bmatrix}^{(k)}
+	\Rightarrow
+	\begin{bmatrix}
+		\utild_1 \\
+		\utild_2
+	\end{bmatrix}^{(4)}
+	=
+	(F^{-1} G)^4
+	\begin{bmatrix}
+		\utild_1 = 50 \\
+		\utild_2 = 100
+	\end{bmatrix}^{(0)}
+\end{align*}
+
+
+
+
+
+

@@ -121,3 +121,16 @@ The Laplace operator in polar coordinates is
 	\left(r\frac{\partial u}{\partial r}\right)
 	+\frac{1}{r^2}\frac{\partial^2 u}{\partial \varphi^2}
 \end{align*}
+
+\subsection{Tridiagonal Matrix}
+\begin{align*}
+    M = \mathrm{tridiag}_{n}(a, b, c) =
+    \begin{bmatrix}
+        b & c & & & & \\
+        a & b & c & & & \\
+        & a & b & c & & \\
+        & & \ddots & \ddots & \ddots & \\
+        & & & a & b & c \\
+        & & & & a & b
+    \end{bmatrix}_{\color{gray}n\times n}
+\end{align*}
