@@ -1,0 +1,36 @@
+\numericsubsection{Leapfrog for Wave Equation}
+
+Given the wave equation $\displaystyle\frac{\partial^2 u}{\partial t^2}=\frac{\partial^2u}{\partial x}$
+on $\Omega = [0,1]\times[0,\infty)$ with extra conditions
+\begin{align*}
+    u(x,0) & = {\color{blue} f(x)}\quad x\in[0,1] \\
+    \tfrac{\partial u}{\partial t}(x,0) & = {\color{teal}g(x)}\quad x\in[0,1] \\
+    u(0,t) & = u(1,t) = 1\quad t\in[0,\infty)
+\end{align*}
+
+We discretise the geometry again:
+\begin{align*}
+    x_{j}^{(k)} & = (j\cdot\Delta x,k\cdot\Delta t)
+    \text{ with }
+    \Delta x = \frac{1}{n}
+    \text{ and }
+    \Delta t = \frac{r}{n} \\
+    & \Rightarrow r = \Delta t\div\Delta x
+\end{align*}
+
+Calculate the first time level by
+\begin{align*}
+{\tilde{u}}
+    _{j}^{(1)} =
+    f(j\cdot\Delta x)+{\color{teal}g(j\cdot\Delta x)}\cdot\Delta t+{\color{blue}f^{\prime\prime}(j\cdot\Delta x)}
+    \cdot\tfrac{\Delta t^{2}}{2}
+\end{align*}
+
+afterwards, apply iteratively:
+\begin{align*}
+    \utild_{j}^{(k+1)} =
+    r^2\cdot + \underbrace{\utild_{j-1}^{(k)}}_\text{left}
+    2\cdot(1-r^{2})\cdot + \underbrace{\utild_{j}^{(k)}}_\text{center}
+    r^{2}\cdot\underbrace{\utild_{j+1}^{(k)}}_\text{right} -
+    \underbrace{\utild_{j}^{(k-1)}}_\text{center past}
+\end{align*}

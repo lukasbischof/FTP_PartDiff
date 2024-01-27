@@ -43,9 +43,13 @@
 \setlength{\columnseprule}{0.2pt}
 
 \definecolor{shadecolor}{RGB}{200,240,240}
+\definecolor{highlight}{RGB}{255,255,150}
+\definecolor{amber}{HTML}{b45309}
 
 \renewcommand{\CancelColor}{\color{purple}}
+\renewcommand{\emph}[1]{{\setlength{\fboxsep}{0pt}\colorbox{highlight}{\em{#1}}}}
 \newcommand{\utild}{\tilde{u}}
+\newcommand{\numericsubsection}[1]{\subsection{{\color{amber} \faArrowRight\ #1}}}
 
 % -----------------------------------------------------------------------
 
