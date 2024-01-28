@@ -45,11 +45,14 @@
 \definecolor{shadecolor}{RGB}{200,240,240}
 \definecolor{highlight}{RGB}{255,255,150}
 \definecolor{amber}{HTML}{b45309}
+\definecolor{indigo}{HTML}{3730a3}
 
 \renewcommand{\CancelColor}{\color{purple}}
 \renewcommand{\emph}[1]{{\setlength{\fboxsep}{0pt}\colorbox{highlight}{\em{#1}}}}
 \newcommand{\utild}{\tilde{u}}
-\newcommand{\numericsubsection}[1]{\subsection{{\color{amber} \faArrowRight\ #1}}}
+\newcommand{\numericsubsection}[1]{\subsection{{\color{amber}#1\ \faBookmarkO}}}
+\newcommand{\symbolicsection}[1]{\section{{\color{indigo}#1\ \faBookmarkO}}}
+\newcommand{\symbolicsubsection}[1]{\subsection{{\color{indigo}#1\ \faBookmarkO}}}
 
 % -----------------------------------------------------------------------
 
@@ -76,6 +79,8 @@
         \input{Transformation}
         \input{SecondOrder}
         \input{Elliptic}
+
+        \hrulefill
 
         \input{NumericalMethods}
         \input{FDMElliptic}
