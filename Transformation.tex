@@ -1,7 +1,7 @@
 \symbolicsubsection{Transformation}\label{subsec:transformation}
 \begin{enumerate}
     \item{
-        Transform equation: derivatives turn into algebraic expressions:
+        Transform equation in the unbounded variable (e.g. $t$): derivatives turn into algebraic expressions:
         \begin{align*}
             \left(
             \mathcal{L}\frac{\partial u(t,y)}{\partial t}
@@ -22,6 +22,18 @@
     \item Inverse transform
 \end{enumerate}
 
+In general, one could use the following transforms:
+
+\begin{tabular}{r|l}
+    Domain & Transform \\
+    \hline
+    $[-\pi, \pi]$ & Fourier Series \\
+    $[a,b]$ & Fourier Series \\
+    $\mathbb{R}$ & Fourier Transform \\
+    $\mathbb{R}_+$ & Laplace Transform \\
+    $G$ & Generalised Fourier Theory
+\end{tabular}
+
 \subsubsection{Laplace Transform}
 
 (Only works on linear equations.)
@@ -38,15 +50,18 @@ It is linear:
 \end{align*}
 
 Example transformations:
-\begin{align*}
-	\begin{matrix}
-		\text{Constant: } & \text{Exponential: } & \text{Derivative: } \\
-		f(t)=c & f(t)=e^{-ct} & f(t)=g^{(n)}(t) \\
-		(\mathcal{L}f)(s) = \frac{c}{s} & (\mathcal{L}f)(s) = \frac{1}{c+s} & (\mathcal{L}f^{(n)})(s)= \\
-		& & -f^{(n-1)}(0)+s\left(\mathcal{L}f^{(n-1)}\right)(s) \\
-		& & \text{(removes t-derivatives: }\frac{\partial}{\partial t}\rightarrow s\text{)}
-	\end{matrix}
-\end{align*}
+\begin{snugshade*}
+    \begin{align*}
+        \begin{matrix}
+            \text{Constant: } & \text{Exponential: } & \text{Derivative: } \\
+            f(t)=c & f(t)=e^{\emph{$-$}ct} & f(t)=g^{(n)}(t) \\
+            (\mathcal{L}f)(s) = \frac{c}{s} & (\mathcal{L}f)(s) = \frac{1}{c+s} & (\mathcal{L}f^{(n)})(s)= \\
+            & & -f^{(n-1)}(0)+s\left(\mathcal{L}f^{(n-1)}\right)(s) \\
+            & & \text{(removes t-derivatives: }\frac{\partial}{\partial t}\rightarrow s\text{)}
+        \end{matrix}
+    \end{align*}
+\end{snugshade*}
+
 
 \subsubsection{Fourier Transform}
 

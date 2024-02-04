@@ -1,4 +1,4 @@
-\section{Cheat Sheet}
+\section{Formulas and Basic Math}
 
 \subsection{Roots}
 
@@ -19,18 +19,32 @@
 
 \subsection{Trigonometry}
 
+\textbf{``Normal''}
 \begin{align*}
     \tan\theta & = \frac{\sin\theta}{\cos\theta} \\
-    \sin -\theta & = -\sin\theta\text{ (cos same)} \\
+    1\div\cot(x) & = \tan(x) \\
+    \sin -\theta & = -\sin\theta\text{ (cos and tan same)} \\
     \sin 2\theta & = 2\sin\theta\cos\theta \\
     \cos 2\theta & = 2\cos^2\theta - \sin^2\theta = 2\cos^2\theta - 1 = 1 - 2\sin^2\theta \\
     \sin(\alpha \pm \beta) & = \sin\alpha\cos\beta\pm\cos\alpha\sin\beta \\
     \cos(\alpha\pm\beta) & = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta \\
+\end{align*}
+\textbf{Hyperbolic}
+\begin{align*}
     \sinh x & = \frac{e^x - e^{-x}}{2}=\frac{e^{2x}-1}{2e^x} \\
     \cosh x & = \frac{e^x + e^{-x}}{2} = \frac{e^{2x}+1}{2e^x} \\
     \tanh x & = \sinh x \div \cosh x \\
     \coth x & = \cosh x \div \sinh x \\
-    \mathrm{sech}\ x & = 1 \div \cosh x = 2 \div (e^x+e^{-x})
+    \mathrm{sech}\ x & = 1 \div \cosh x = 2 \div (e^x+e^{-x}) \\
+    1 & = \cosh^2(x) - \sinh^2(x) \\
+    -1 & = \sinh^2(x) - \cosh^2(x) \\
+    e^x & = \cosh(x) + \sinh(x) \\
+    e^{-x} & = \cosh x - \sinh x \\
+    \sinh(x\pm y) & = \sinh(x)\cosh(y)\pm \cosh(x)\sinh(y) \\
+    \cosh(x\pm y) & = \cosh(x)\cosh(y)\pm\sinh(x)\sinh(y) \\
+    \sinh(2x) & = 2\cdot\sinh(x)\cosh(x) \\
+    \sqrt{x^2 + 1} & = \cosh(\mathrm{arcsinh}(x)) \\
+    \sqrt{x^2 - 1} & = \sinh(\mathrm{arccosh}(x))
 \end{align*}
 
 \subsection{Derivatives}
@@ -93,11 +107,44 @@ Special case where $a(x)=a=\mathrm{const.}$ and $b(x)=b=\mathrm{const.}$:
     =\int_a^b\frac{\partial}{\partial x}f(x,t)\ dt
 \end{equation*}
 
+\subsection{Determinant}
+\makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/determinant}}
+
+\begin{align*}
+	\det
+	\begin{bmatrix}
+		a & b \\
+		c & d
+	\end{bmatrix}
+	=
+	ad-bc
+\end{align*}
+\begin{align*}
+	\det
+	\begin{bmatrix}
+		a & b & c \\
+		d & e & f \\
+		g & h & i
+	\end{bmatrix}
+	=
+	a(ei-fh)-b(di-fg)+c(dh-eg)
+\end{align*}
+
+\subsubsection{Properties}
+\begin{itemize}
+	\item $\det\left(A^{-1}\right) = \frac{1}{\det(A)}$
+	\item $\det(A^T) = \det(A)$
+	\item $\det(I) = 1$
+	\item $\det(cA) = c^n\det(A)\quad(\text{for an }n\times n\text{ matrix})$
+	\item $\det(AB) = \det(A)\det(B)$
+	\item $\det(A) = \prod_{i=1}^n \lambda_i$
+\end{itemize}
+
 \subsection{Particular Solutions to Simple ODEs}
 
 \begin{tabular}[h]{rcl}
     $f'(x)=\frac{c}{x}f(x)$ & $\Rightarrow$ & $f(x)=k_1y^c$                                             \\
-    $f'(x)=x\cdot f(x)$     & $\Rightarrow$ & $f(x)=k_1e^{cx}$                                          \\
+    $f'(x)=c\cdot f(x)$     & $\Rightarrow$ & $f(x)=k_1e^{cx}$                                          \\
     $f''(x) = c\cdot f(x)$  & $\Rightarrow$ & $f(x) = k_1e^{\sqrt{c}x}+k_2e^{-\sqrt{c}x}$               \\
     $f''(x) = -c\cdot f(x)$ & $\Rightarrow$ & $f(x)=k_1\sin(\sqrt{c}x)+k_2\cos(\sqrt{c}x)$              \\
     $f'(x)+af(x) = b$       & $\Rightarrow$ & $f(x) = \left(f(0)-\frac{b}{a}\right)e^{-ax}+\frac{b}{a}$
@@ -113,14 +160,25 @@ A function is harmonic if it fulfils $\Delta f = 0$. The mean value property app
 \subsection{Polar Coordinates}
 \begin{align*}
     x = r\cos \varphi \\
-    y = r\sin \varphi
+    y = r\sin \varphi \\
+\end{align*}
+\begin{align*}
+    r & = \sqrt{x^2+y^2}\quad{\color{gray} \text{(!) when converting } x^2+y^2\text{, it's }r^2!} \\
+    \varphi & = \mathrm{atan2}\left(\frac{y}{x}\right)
 \end{align*}
 
 The Laplace operator in polar coordinates is
 \begin{align*}
-    \Delta u = \frac{1}{r}\frac{\partial}{\partial r}
+    \Delta u & = \frac{1}{r}\frac{\partial}{\partial r}
     \left(r\frac{\partial u}{\partial r}\right)
-    +\frac{1}{r^2}\frac{\partial^2 u}{\partial \varphi^2}
+    +\frac{1}{r^2}\frac{\partial^2 u}{\partial \varphi^2} \\
+    & = \frac{\partial^2 u}{\partial r^2}+\frac{1}{r}\frac{\partial u}{\partial r} +
+    \frac{1}{r^2}\frac{\partial^2 u}{\partial \varphi^2}
+\end{align*}
+
+\subsection{Quadratic Fromula}
+\begin{align*}
+    x = \frac{-b\pm\sqrt{b^2 - 4ac}}{2a}
 \end{align*}
 
 \subsection{Tridiagonal Matrix}
