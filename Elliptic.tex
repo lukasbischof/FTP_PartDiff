@@ -6,3 +6,45 @@ and $u$ is a solution $Lu = 0$, then $u$ takes its maximum and minimum on the bo
 \subsection{Uniqueness of Solutions}
 Theorem: If $L$ is an elliptic differential operator on a connected and bounded domain $\Omega$,
 then there is at most one solution of $Lu = f$ with boundary conditions $u_{|\partial\Omega} = g$.
+
+\symbolicsubsection{Green's Function}
+
+\begin{addmargin}[1em]{0em}
+    {\color{teal}
+        Heaviside function: $\vartheta(x - \xi) = \left\{ \begin{matrix}
+            1\quad \xi\leq x \\
+            0\quad \xi > x
+        \end{matrix} \right.$
+        translates the integral $\int_0^xf(\xi)d\xi$ to $\int_0^1\vartheta(x-\xi)\cdot f(\xi)d\xi$ for $\xi$
+        in $[0,1]$.
+    }
+\end{addmargin}
+
+Given the Laplace equation $\nabla^2u=f$, we want to find an ``inverse'' Laplace such that
+\begin{align*}
+    u(x) = \int G(x,\xi)f(\xi)\ d\xi
+\end{align*}
+
+There is a function $G(x,\xi)$ on $\bar{\Omega}\times\bar{\Omega}$ called Green's function such that
+\begin{align*}
+    \Delta G(x,\xi) = \delta(x-\xi)\quad\text{ in }\Omega\text{ and }G(x,\xi) = 0\text{ for }\xi\in\partial\Omega
+\end{align*}
+
+the general Poisson problem $\Delta u = f$ in $\Omega$ with boundary conditions $u = g$ on $\partial\Omega$ has the solution
+\begin{align*}
+    u(x) = \int_\Omega G(x,\xi)f(\xi)\ d\xi + \int_{\partial\Omega} g(\xi)\cdot\mathrm{grad}_\xi G(x,\xi)\ dn
+\end{align*}
+with $n$ is an outside pointing normal.
+To construct a particular solution $u_p$ of $\Delta u=f$ on $\Omega \subset \mathbb{R}^n$, there are the following Green's
+functions (using Dirac-$\delta$ function):
+\begin{align*}
+    G(x,\xi) = \left\{
+    \begin{matrix}
+        \frac{1}{2}|x-\xi| & \text{for }n = 1 \\
+        \frac{1}{2\pi}\log|x-\xi| & \text{for }n = 2 \\
+        \frac{1}{4\pi}\frac{1}{|x-\xi|} & \text{for }n = 3
+    \end{matrix}
+    \right\}\Rightarrow\Delta G(x,\xi) = \delta(x-\xi)
+\end{align*}
+
+then $u_p(x) = \int_\Omega G(x,\xi)f(\xi)\ d\xi$.
