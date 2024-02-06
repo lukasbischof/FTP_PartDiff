@@ -26,6 +26,17 @@ $}
 A strip then is a curve $(x(s), y(s), u(x))$ together with the slopes of the tangent planes
 $p(s) = \frac{\partial u}{\partial x}$ and $q(s) = \frac{\partial u}{\partial y}$.
 
+Consequence: A solution $u(t,x)$ of the wave equation determines a strip for each value $t$:
+\resizebox{\columnwidth}{!}{$
+    x(s) = s\quad t(s) = t\quad u(s) = u(t,s)\quad p(s) = \frac{\partial u}{\partial x}(s,t)\quad q(s) = \frac{\partial u}{\partial t}(s,t)
+$}
+
+with an initial strip
+
+$x(s) = s\quad t(s) = 0\quad u(s) = f(s)\quad p(s) = f'(s)\quad q(s)=g(s)$
+
+the Cauchy-Problem therefore has to be formulated in terms of the strip.
+
 The second partial derivatives are then determined by the linear system
 \begin{align*}
     a\frac{\partial^{2}u}{\partial x^{2}}+2b\frac{\partial^{2}u}{\partial x\partial y}
@@ -59,13 +70,23 @@ $}
 
 (note: $t$ is the mapping variable of the curve, if the PDE uses time (e.g. wave) $s$ may be used)
 
-\textbf{Consequence:} A solution $u(t,x)$ of the wave equation determines a strip for each value $t$:
-\resizebox{\columnwidth}{!}{$
-    x(s) = s\quad t(s) = t\quad u(s) = u(t,s)\quad p(s) = \frac{\partial u}{\partial x}(s,t)\quad q(s) = \frac{\partial u}{\partial t}(s,t)
-$}
+The equation for the characteristics can be simplified for non-constant by dividing by e.g. $\dot{x}(s)^2$. For example:
+\begin{align*}
+    & x\dot{y}(s)^{2}+\dot{x}(s)\dot{y}(s)+\dot{x}(s)^{2}=0\quad{\color{gray}|\div \dot{x}(s)^2} \\
+    & = x\frac{\dot{y}(s)^{2}}{\dot{x}(s)^{2}}+\frac{\dot{y}(s)}{\dot{x}(s)}+1=0
+    \quad {\color{gray} \left|\ \dot{y}/\dot{x} = \frac{dy/ds}{dx/ds} = y' \right.} \\
+    & = x(y')^2 + y' + 1 = 0
+\end{align*}
 
-with an initial strip
+which is a quadratic first order differential equation that can be factored into two first order linear differential equations.
 
-$x(s) = s\quad t(s) = 0\quad u(s) = f(s)\quad p(s) = f'(s)\quad q(s)=g(s)$
+\textbf{Properties: Touch} Characteristics touch if the equation
+\begin{align*}
+    a(y')^2 - 2by' + c = 0
+\end{align*}
 
-the Cauchy-Problem therefore has to be formulated in terms of the strip.
+has \emph{one solution} for $y'$.
+
+\textbf{Properties: Influence} We can find the boundaries influencing a certain point $P$ by first finding the
+characteristic curves that intersect the point by solving the ODEs and setting the constants based on x- and y-values of
+$P$ and afterwards, calculating using the curves where they start on the boundary.
