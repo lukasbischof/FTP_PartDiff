@@ -2,6 +2,124 @@
 
 \numericsubsection{Variational Problem: Method of Ritz}
 
+Having a two-point boundary problem $-u''(x) = f(x)$ with $v(0)=v(1)=0$ on $[0,1]$, we need to find a function
+that minimises the functional $\phi(v) = \int_0^1\sfrac{1}{2}\cdot v'(x)^2-f(x)\cdot v(x)\ dx$
+
+Idea of Ritz: Focusing on a vector subspace $\mathbb{V}^{(n)}\subset \mathbb{V}$ in which we know
+that there's a solution and then minimise the functional for all linear combinations:
+\begin{align*}
+    a_1v_1(x)+\ldots+a_nv_n(x),\quad a_k\in\mathbb{R}
+\end{align*}
+
+We have the Ritz matrix
+\begin{align*}
+    R_{j,k}^{(n)} & = \int_0^1 v_j'(x)\cdot v_k'(x)\ dx \\
+    & = v_j'(x)\cdot v_k(x)|_0^1 - \int_0^1 v_j''(x)\cdot v_k(x)\ dx \\
+    & = - \int_0^1 v_j''(x)\cdot v_k(x)\ dx\quad\text{\color{gray} (homogeneous b.c.)}
+\end{align*}
+and the Ritz Vector
+\begin{align*}
+    r_k^{(n)} = \int_0^1 f(x)\cdot v_k(x)\ dx
+\end{align*}
+to find the $a$ coefficients: $R^{(n)}\cdot\vec{a} = \vec{r}^{(n)}$.
+
+\subsubsection{Example}
+
+\textbf{Given} Baby Poisson $-u''(x) = f(x)$ with ${\color{blue}f(x) = \pi^2\sin(\pi x)}$ with $u(0) = u(1) = 0$.
+We want to compute the coefficient $b$ in the ansatz $\utild(x) = b\cdot(x - 2x^2 + x^3)$.
+
+\textbf{Solution} We compute the (1-dimensional) Ritz matrix $R$ with
+${\color{red} v1(x) = x - 2x^2 + x^3}$:
+\begin{align*}
+    R_{11} = \int_0^1 {\color{red}v_1}'(x)\cdot {\color{red}v_1}'(x)\ dx = \int_0^1 {\color{red}(1-4x+3x^2)}^2\ dx = \sfrac{2}{15}
+\end{align*}
+
+and the (1-dimensional) Ritz vector with
+\begin{align*}
+    r_1=\int_0^1 {\color{blue} f(x)}\cdot {\color{red}v_1(x)}\ dx = \int_0^1 {\color{blue} \pi^2\sin(\pi x)}\cdot{\color{red}(x-2x^2+x^3)}\ dx = \frac{2}{\pi}
+\end{align*}
+
+Thus, we get $R_{11}\cdot b = r_1$ and therefore $b=\sfrac{15}{\pi}$.
+
+\numericsubsection{Method of Galerkin}
+
+Weak reformulation: Find a function $u(x)$ (for problem $-u''(x)=f(x)\Rightarrow u''(x)+f(x)=0$) in $\mathbb{V}$ such that for all $v(x)\in\mathbb{V}$ one has
+\begin{align*}
+    \int_0^1 \left(u''(x) + f(x)\right)\cdot v(x)\ dx = 0
+\end{align*}
+and then focus on $n$ carefully chosen functions $v_1(x),\ldots,v_n(x)$ and find a function $\utild(x)$ in $\mathbb{V}^{(n)}$,
+called ansatz, (that already satisfy the Dirichlet boundary conditions) such that, when substituted for the above integral
+\begin{align*}
+    \int_0^1 \left(\utild''(x) + f(x)\right)v_k(x)\ dx = 0,\quad {\color{gray} k = 1,\ldots,n}
+\end{align*}
+
+The $n$ equations thus turn into $n$ linear equations
+\colorbox{shadecolor}{$
+    \displaystyle
+    \int_0^1 \left(a_1\cdot v_1''(x)+\ldots+a_n\cdot v_n''(x) + f(x)\right)\cdot v_k(x)\ dx = 0
+$}
+
+\colorbox{shadecolor}{for $k = 1,\ldots,n$},
+giving the Galerkin Matrix $G_{k,j}^{(n)} = \int_0^1 v_j''(x)\cdot v_k(x)\ dx$ and the
+Galerkin vector $g_k^{(n)} = \int_0^1 f(x)\cdot v_k(x)\ dx$ and the system $G^{(n)}\cdot\vec{a} + \vec{g}^{(n)} = 0$.
+We can also observe that $G^{(n)} = -R^{(n)}$ and $\vec{g}^{(n)} = \vec{r}^{(n)}$.
+
+\subsubsection{Example}
+
+\textbf{Given} The function $u(x)$ on $\Omega = [0,1]$ satisfies Helmholtz's equation
+$u''(x) + 17u(x) = 0$ (\emph{= 0 important, move to left side}) with Dirichlet conditions
+$u(0) = 0, u(1) = 1$. Determine an approx. function $\utild(x)$ for $u(x)$ with the ansatz
+$\utild(x) = x + a_1(x-x^2) + a_2(x^2-x^3)$ (that already satisfies b.c.)
+
+\textbf{Solution}
+Given the ansatz
+\begin{align*}
+    \utild(x) & = x + a_1{\color{blue}(x-x^2)} + a_2{\color{blue}(x^2-x^3)} \\
+    \utild''(x) &  = -2a_1 + a_2(2-6x) \\
+    {\color{blue} v_1(x)} & {\color{blue} = x-x^2} \\
+    {\color{blue}v_2(x)} & {\color{blue}= x^2 - x^3}
+\end{align*}
+we receive the linear system
+\begin{align*}
+    & \int_0^1 \left(\utild''(x) + 17\utild(x)\right)\cdot {\color{blue}v_1(x)}\ dx = 0 \\
+    & \int_0^1 \left(\utild''(x) + 17\utild(x)\right)\cdot {\color{blue}v_2(x)}\ dx = 0
+\end{align*}
+
+which gives
+\resizebox{\columnwidth}{!}{$
+    \displaystyle
+    \int_0^1 \left[-2a_1 + a_2(2-6x) + 17(x + a_1{\color{blue}(x-x^2)} + a_2{\color{blue}(x^2-x^3)})\right]\cdot
+    {\color{blue}(x-x^2)}\ dx = 0
+$}
+\resizebox{\columnwidth}{!}{$
+    \displaystyle
+    \int_0^1 \left[-2a_1 + a_2(2-6x) + 17(x + a_1{\color{blue}(x-x^2)} + a_2{\color{blue}(x^2-x^3)})\right]\cdot
+    {\color{blue}(x^2-x^3)}\ dx = 0
+$}
+
+separating by coefficients:
+\resizebox{\columnwidth}{!}{$
+    \displaystyle
+    \int_0^1 \left[a_1(-2+17x-17x^2) + a2(2-6x+17x^2-17x^3)\right]\cdot
+    {\color{blue}(x-x^2)}\ dx = 0
+$}
+\resizebox{\columnwidth}{!}{$
+    \displaystyle
+    \int_0^1 \left[-2a_1 + a_2(2-6x) + 17(x + a_1{\color{blue}(x-x^2)} + a_2{\color{blue}(x^2-x^3)})\right]\cdot
+    {\color{blue}(x^2-x^3)}\ dx = 0
+$}
+
+leaves a system in the form $a_1\int_0^1\cdots + a_2\int_0^1\cdots + \int_0^1\cdots = 0$. With the integrals solved, we get:
+\begin{align*}
+    a_1 \frac{7}{30} + a_2\frac{7}{60} + \frac{17}{12} = 0 \\
+    a_1 \frac{7}{60} + a_2\frac{1}{85} + \frac{17}{12} = 0
+\end{align*}
+
+and we receive $a_1 \approx -8.45$ and $a_2 \approx 4.76$ and thus
+$\utild(x) = x - 8.45 (x-x^2) + 4.76(x^2 - x^3)$.
+
+\numericsubsection{Elliptic}
+
 We have a set of given local basis functions $v_1(x), \ldots, v_n(x)$ that are continuous and piecewise differentiable.
 We subdivide $\Omega$ into meshes and assign each nodal point a nodal variable $a_k$.
 Then, we use shape functions to represent the PDE on the mesh,

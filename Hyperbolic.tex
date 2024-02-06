@@ -80,13 +80,19 @@ The equation for the characteristics can be simplified for non-constant by divid
 
 which is a quadratic first order differential equation that can be factored into two first order linear differential equations.
 
-\textbf{Properties: Touch} Characteristics touch if the equation
+\textbf{Property: Touch} Characteristics touch if the equation
 \begin{align*}
     a(y')^2 - 2by' + c = 0
 \end{align*}
 
-has \emph{one solution} for $y'$.
+has \emph{one solution} for $y'$. The different solutions intersect, if there are multiple solutions for y'
+($0\neq (-2b)^2-4ac = -4\det A > 0$).
 
-\textbf{Properties: Influence} We can find the boundaries influencing a certain point $P$ by first finding the
+$\Rightarrow$ Different solution surfaces touch along characteristic curves.
+
+\textbf{Property: Influence} We can find the boundaries influencing a certain point $P$ by first finding the
 characteristic curves that intersect the point by solving the ODEs and setting the constants based on x- and y-values of
 $P$ and afterwards, calculating using the curves where they start on the boundary.
+
+\textbf{Summary} Characteristic curves are the curves that are not possible as Cauchy initial curve and describe the
+evolution of a PDE.
