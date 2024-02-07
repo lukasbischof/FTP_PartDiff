@@ -40,9 +40,9 @@ the Cauchy-Problem therefore has to be formulated in terms of the strip.
 The second partial derivatives are then determined by the linear system
 \begin{align*}
     a\frac{\partial^{2}u}{\partial x^{2}}+2b\frac{\partial^{2}u}{\partial x\partial y}
-    + c\frac{\partial^{2}u}{\partial y^{2}} & = h(t)\,=g-d p(t)-e q(t)-f u \\
-    \dot{x}(t)\frac{\partial^{2}u}{\partial x^{2}}+\dot{y}(t)\frac{\partial^{2}u}{\partial x\partial y} & = \dot{p}(t) \\
-    \dot{x}(t)\frac{\partial^{2}u}{\partial x\partial y} + \dot{y}(t)\frac{\partial^{2}u}{\partial y^2} & = \dot{q}(t)
+    + c\frac{\partial^{2}u}{\partial y^{2}} & = h(s)\,=g-d p(s)-e q(s)-f u \\
+    \dot{x}(s)\frac{\partial^{2}u}{\partial x^{2}}+\dot{y}(s)\frac{\partial^{2}u}{\partial x\partial y} & = \dot{p}(s) \\
+    \dot{x}(s)\frac{\partial^{2}u}{\partial x\partial y} + \dot{y}(s)\frac{\partial^{2}u}{\partial y^2} & = \dot{q}(s)
 \end{align*}
 
 The \emph{characteristics} of a differential equation are the curves $t\mapsto(x(t),y(t))$ for which the initial data
@@ -51,8 +51,8 @@ does not determine the second partial derivatives uniquely and thus, determinant
     \det
     \begin{bmatrix}
         a & 2b & c \\
-        \dot{x}(t) & \dot{y}(t) & 0 \\
-        0 & \dot{x}(t) & \dot{y}(t)
+        \dot{x}(s) & \dot{y}(s) & 0 \\
+        0 & \dot{x}(s) & \dot{y}(s)
     \end{bmatrix}
     = 0
 \end{align*}
@@ -65,7 +65,7 @@ The determinant is constructible from the \emph{symbol matrix $A$} and we thus r
         b & c
     \end{bmatrix}
     \quad\Rightarrow\quad
-    a\dot{y}(t)^2 - 2b\dot{x}\dot{y}(t) + c\dot{x}(t)^2 = 0
+    a\dot{y}(s)^2 - 2b\dot{x}(s)\dot{y}(s) + c\dot{x}(s)^2 = 0
 $}
 
 (note: $t$ is the mapping variable of the curve, if the PDE uses time (e.g. wave) $s$ may be used)
