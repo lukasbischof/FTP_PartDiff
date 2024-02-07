@@ -120,7 +120,7 @@ $\utild(x) = x - 8.45 (x-x^2) + 4.76(x^2 - x^3)$.
 
 \numericsubsection{Elliptic}
 
-\makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/FEM_Geometry}}
+\makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/FEM_geometry}}
 
 Introduce on problem domain nodal points that divide the geometry into cells or meshes.
 Associate to each nodal variable $a_k$ of a nodal point a local function $v_k$ from 
@@ -185,7 +185,7 @@ and the boundary conditions $u(0) = 1$ and $u(1) = 2$. We want to find an approx
 $[0, 0.5], [0.5, 0.75], [0.75, 1]$ and linear shape functions.
 \\[1em]
 \textbf{Discretisation of Geometry}
-\makebox[\columnwidth]{\includegraphics[width=0.8\columnwidth]{images/FEM_Example}}
+\makebox[\columnwidth]{\includegraphics[width=0.8\columnwidth]{images/FEM_example}}
 
 \textbf{Solution}
 
@@ -324,7 +324,7 @@ We want to approximate using meshes $[0,0.25], [0.25, 0.75], [0.75, 1]$.
 \textbf{Discretisation of Geometry}
 
 Since we have homogeneous boundary conditions, we can ignore $v_0$ and $v_3$:
-\makebox[\columnwidth]{\includegraphics[width=0.4\columnwidth]{images/FEM_Example2}}
+\makebox[\columnwidth]{\includegraphics[width=0.4\columnwidth]{images/FEM_example2}}
 giving $\utild(x) = 0 v_0(x)+a_1v_1(x)+a_2v_2(x)+0v_3(x)$.
 \\[1em]
 \textbf{Solution}
@@ -358,7 +358,7 @@ due to homogeneous boundary conditions, we cancel the first and last row and col
     \end{bmatrix}
 \end{align*}
 
-\subsubsection{Example With Funky $f(x)$}
+\subsubsection{Example With Funky $\mathbf{f(x)}$}
 
 Problem: $-u''(x) = f(x)$ in $\Omega = [0,1]$ with
 \begin{align*}
@@ -373,7 +373,7 @@ Problem: $-u''(x) = f(x)$ in $\Omega = [0,1]$ with
 \end{align*}
 and homogeneous b.c. and $h = 1/4$.
 
-\makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/FEM_Example3}}
+\makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/FEM_example3}}
 
 The Ritz vector then is:
 
@@ -387,7 +387,7 @@ For $v_3$: $40\cdot\frac{1}{4}\frac{1}{2} = 5$; $16\cdot \frac{1}{4}\frac{1}{2} 
 
 Using quadratic shape functions $q_1(x) = (1-x)(1-2x), q_2(x) = 4x(1-x), q_3(x) = -x(1-2x)$ as shape functions
 
-\makebox[\columnwidth]{\includegraphics[width=0.4\columnwidth]{images/FEM_pStrategy}}
+\makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/FEM_pStrategy}}
 
 The v-functions for three nodes then look like
 
@@ -398,7 +398,7 @@ with an affine transformation of the x values onto the nodal points.
 We get a new element matrix:
 \begin{snugshade*}
     \begin{align*}
-        E = 
+        E = \frac{1}{3}
         \begin{bmatrix}
             7 & -8 & 1 \\
             -8 & 16 & -8 \\
@@ -420,3 +420,44 @@ The Ritz vector can be computed analogous to the previous methods:
 
 with the difference that the integral is not as straight forward as with the triangle function
 ({\color{blue}\faInfo}\ except for baby Laplace problem $u''(x) = 0$, since there the Ritz-vector is zero and no integration needed)
+
+\subsubsection{Example}
+\textbf{Given} $-u''(x) = -2$ on $\Omega = [0,1]$ with $u(0) = 1$ and $u(1) = 3$.
+We want to approximate with $\utild$ and $h=1$.
+\\[1em]
+\textbf{Discretisation of Geometry}
+The resulting curves are exactly
+\makebox[\columnwidth]{\includegraphics[width=0.25\columnwidth]{images/FEM_pStrategy}}
+where $q_1$ and $q_3$ are determined by the boundary conditions.
+\\[1em]
+\textbf{Solution}
+We get the mesh matrix and a resulting system
+\begin{align*}
+    \frac{1}{h=1}\frac{1}{3}
+    \begin{bmatrix}
+        {\color{red}\{}7 & -8 & 1{\color{red}\}} \\
+        {\color{blue}-8} & {\color{blue}16} & {\color{blue}-8} \\
+        {\color{red}\{}1 & -8 & 7 {\color{red}\}}
+    \end{bmatrix}
+    \begin{bmatrix}
+        1 \\ a \\ 3
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        {\color{red} \times} \\
+        \int_0^1 f(x)\cdot q_2(x)\ dx \\
+        {\color{red} \times}
+    \end{bmatrix}
+\end{align*}
+
+We only need to evaluate the integral of the $q_2$ since the other curves are determined already.
+We receive:
+\begin{align*}
+    \int_0^1 -2\cdot (4x-4x^2)\ dx = -\frac{4}{3}
+\end{align*}
+
+and since we can eliminate the first and second row, we get:
+\begin{align*}
+    & \frac{1}{3}({\color{blue}-8 + 16}a {\color{blue}- 24}) = -\frac{4}{3}\quad\Rightarrow\quad a=\frac{7}{4} \\
+    & \Rightarrow \utild(x) = 1\cdot q_1(x) + \sfrac{7}{4}\cdot q_2(x) + 3 q_3(x)
+\end{align*}
