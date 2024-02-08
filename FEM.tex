@@ -97,16 +97,11 @@ $}
     {\color{blue}(x^2-x^3)}\ dx = 0
 $}
 
-separating by coefficients:
+separating by coefficients (e.g. for first equation):
 \resizebox{\columnwidth}{!}{$
     \displaystyle
     \int_0^1 \left[a_1(-2+17x-17x^2) + a2(2-6x+17x^2-17x^3)\right]\cdot
     {\color{blue}(x-x^2)}\ dx = 0
-$}
-\resizebox{\columnwidth}{!}{$
-    \displaystyle
-    \int_0^1 \left[-2a_1 + a_2(2-6x) + 17(x + a_1{\color{blue}(x-x^2)} + a_2{\color{blue}(x^2-x^3)})\right]\cdot
-    {\color{blue}(x^2-x^3)}\ dx = 0
 $}
 
 leaves a system in the form $a_1\int_0^1\cdots + a_2\int_0^1\cdots + \int_0^1\cdots = 0$. With the integrals solved, we get:
@@ -123,7 +118,7 @@ $\utild(x) = x - 8.45 (x-x^2) + 4.76(x^2 - x^3)$.
 \makebox[\columnwidth]{\includegraphics[width=0.5\columnwidth]{images/FEM_geometry}}
 
 Introduce on problem domain nodal points that divide the geometry into cells or meshes.
-Associate to each nodal variable $a_k$ of a nodal point a local function $v_k$ from 
+Associate to each nodal variable $a_k$ of a nodal point a local function $v_k$ from
 a set of given local basis functions $v_1(x), \ldots, v_n(x)$ that are continuous and piecewise differentiable.
 Thus, the ansatz $\utild(x) = a_0v_0(x)+a_1v_1(x)+\ldots+a_nv_n(x)$ has shape functions $v_k$ that are one on
 the respective nodal point $k$.
@@ -131,7 +126,7 @@ Then, we use shape functions to represent the PDE on the mesh,
 e.g. using triangular functions $l_1(x)=1-x$ and $l_2(x) = x$ to obtain \emph{local} element matrices
 \begin{snugshade*}
 \begin{align*}
-	E_\text{step} = 
+	E_\text{step} =
 	\begin{bmatrix}
 		\int_0^1 l_1^\prime(s)\cdot l_1^\prime(s)\ ds & \int_0^1 l_1^\prime(s)\cdot l_2^\prime(s)\ ds \\
 		\int_0^1 l_2^\prime(s)\cdot l_1^\prime(s)\ ds & \int_0^1 l_2^\prime(s)\cdot l_2^\prime(s)\ ds
@@ -141,7 +136,7 @@ e.g. using triangular functions $l_1(x)=1-x$ and $l_2(x) = x$ to obtain \emph{lo
 		1 & -1 \\
 		-1 & 1
 	\end{bmatrix}
-\end{align*}    
+\end{align*}
 \end{snugshade*}
 
 
@@ -173,7 +168,7 @@ That yields the approximation function (as defined by the ansatz): $\tilde{u}(x)
 with $a_0$ and $a_3$ fulfilling the boundary conditions.
 
 This shape function approach can also be applied to the Ritz vector.
-We get $\tilde{f}(x) = f(a_0)\cdot v_0(x)+\ldots+f(a_n)v_n(x)$ and we approximate 
+We get $\tilde{f}(x) = f(a_0)\cdot v_0(x)+\ldots+f(a_n)v_n(x)$ and we approximate
 $r_{k}^{n}=\int_{0}^{1}f(x)\cdot v_{k}(x)\;dx$ by $\tilde{r}_{k}^{n}=\int_{0}^{1}\tilde{f}(x)\cdot v_{k}(x)\;dx$
 which essentially is $\tilde{r}^n = S^n \cdot \vec{f}^n$ where $\vec{f}^n$ is the vector of nodal values
 and $S_{k,j}^n=\int_0^1 v_j(x)\cdot v_k(x)\ dx$
@@ -268,7 +263,7 @@ resulting in the global Ritz-Matrix and Ritz-Vector:
             \int_0^1 f(x)v_3(x)\ dx
         \end{bmatrix}
     }^{\vec{r}} \\
-    & = 
+    & =
     \begin{bmatrix}
         \frac{\sfrac{1}{2}\cdot 8}{2} = 2\quad\text{(area of {\color{red} red shape function})} \\
         \frac{\sfrac{3}{4}\cdot 8}{2} = 3\quad\text{(area of {\color{blue} blue shape function})} \\
