@@ -5,7 +5,7 @@ Linear PDEs of second order have the form
 	\sum_{i,j=1}^n a_{ij}\frac{\partial ^2}{\partial x_i\partial x_j}u+\sum_{i=1}^nb_i\frac{\partial}{\partial x_i}u + cu = f
 \end{align*}
 
-The equations fall into these categories: 
+The equations fall into these categories:
 \emph{Elliptic} (potential problem), \emph{parabolic} (heat equation, diffusion)
 and \emph{hyperbolic} (wave equation, linearised supersonic flow).
 
@@ -40,7 +40,7 @@ we have the PDE $Lu = f \text{ in }\Omega$ with $u = g \text{ on }\partial\Omega
 \end{enumerate}
 
 For example, consider the PDE $\nabla^2 u = 4$ in $\Omega = \{(x,y)\ |\ x^2 + y^2 < 1\}$ and $u = 0.5x+0.5$ on $\partial\Omega$.
-This has the particular solution $u_p(x,y)=x^2+y^2$. 
+This has the particular solution $u_p(x,y)=x^2+y^2$.
 To fix boundary conditions, we find a solution $u_r$ of the homogeneous problem with boundary values
 $u_r = 0.5x + 0.5 - u_p(x,y) = 0.5x + 0.5 - \underbrace{1}_{\text{on }\partial\Omega} = 0.5x - 0.5$ giving the complete solution
 $u(x,y) = u_p(x,y) + u_r(x,y) = x^2 + y^2 + 0.5x - 0.5$.

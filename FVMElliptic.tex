@@ -25,12 +25,12 @@ $}
 
 for all non-pathological domains $\Gamma\subset\Omega$.
 
-The \emph{left flux integral} will then be discretised along a finite set of normal derivatives 
+The \emph{left flux integral} will then be discretised along a finite set of normal derivatives
 for a discrete, polygonal cell:
 \begin{align*}
     \oint_{\partial\Gamma}\cdots\ d\vec{n} \approx \sum_j = \frac{u(P_j) - u(P_i)}{\delta_{i,j}}\cdot \lambda_{i,j}
 \end{align*}
-for each normal $j$ of cell $i$ with two cell points $P_i,P_j$ and let 
+for each normal $j$ of cell $i$ with two cell points $P_i,P_j$ and let
 $\delta_{i,j}$ be the distance between the two cell points
 and $\lambda_{i,j}$ the length of the common edge of the two cells.
 
@@ -53,7 +53,7 @@ We can apply the following ``algorithm'':
 \subsubsection{Example}
 
 \textbf{Given:} The function $u(x,y)$ in $\Omega=[0,1]\times[0,1]$ satisfies $\Delta u(x,y) = 1$.
-We want to find approximate values in the four points 
+We want to find approximate values in the four points
 $(\sfrac{1}{3},\sfrac{1}{3})$, $(\sfrac{2}{3}, \sfrac{1}{3})$,
 $(\sfrac{1}{3}, \sfrac{2}{3})$ and $(\sfrac{2}{3}, \sfrac{2}{3})$
 
@@ -63,7 +63,7 @@ $(\sfrac{1}{3}, \sfrac{2}{3})$ and $(\sfrac{2}{3}, \sfrac{2}{3})$
 
 \textbf{Solution}
 
-The area of the cell is approximatively 
+The area of the cell is approximatively
 $\int_{\Gamma_p} f(x,y)\ dxdy \approx f(P)\cdot h^2$ with cell length $h$ which is always
 $\sfrac{1}{4}$ in our case. Therefore, we formulate the linear system:
 
